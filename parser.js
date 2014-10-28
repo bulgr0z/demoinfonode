@@ -56,9 +56,10 @@ module.exports.prototype = {
 				console.log('signon packet', this.demoBuffer.getCursor());
 
 				var message = this.messageDecoder.decodeNetPacket(function(messages) {
-					console.log('JOB DONE ?')
-					console.log(msg)
-				});
+					// console.log('JOB DONE ?')
+					// console.log(msg)
+					this.output(messages)
+				}.bind(this));
 
 				// console.log(this.demoBuffer)
 				// var cmdinfo = Structs.CmdInfo.decode(this.demoBuffer);

@@ -39,14 +39,10 @@ module.exports.prototype = {
 	},
 
 	_decodeNetMessages : function(packetBuffer, cb) {
-		console.log('DECODE ! / CURSOR : ', this.demoBuffer.getCursor())
-
 		var offset = 0 // progression through the packet
-			, decoded = false
-			, result = [];
+			, messages = [];
 
-		//var count = 0; // debug
-		while (!decoded) {
+		while (offset < packetBuffer.length) {
 
 			// each message starts with a header of 2 varint32 : 
 			// 	- command (corresponding to a protobuf message)
@@ -57,55 +53,20 @@ module.exports.prototype = {
 				, messageLength = Varint.decode(packetBuffer.slice(offset + cmdSize)) // 
 				, messageHeaderLength = cmdSize + Varint.decode.bytes; // ... + bytes needed for messageLength
 
-		
-			if (cmd <= 0 || typeof cmd === "undefined") break; // 0 is not a valid cmd, need better error handling
-			//if (count > 3) break; // debug
-
+			//console.log('OFFSET ', offset, packetBuffer.length)		
+			
 			var messageType = this.net_messages[cmd];
 			if (messageType) { // skip to the next message if type not found in net_messages
-				result.push(this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + cmdSize))); // decode the message
+				messages.push(this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + cmdSize))); // decode the message
 				console.log('-- DECODING : ', messageType);
 			} else {
 				console.log('-- SKIPPING CMD ', cmd);
 			}
 			
 			offset += messageHeaderLength + messageLength;
-			//offset = offset + 8 + result[messageType].calculate(); // offset the command and message length 
-
-			// console.log("RESULT ", result)
-			// console.log("MESSAGE LENGTH ", result[messageType].calculate())
-			// console.log("NEW OFFSET ", offset);
-
-			//count ++ // debug
-			//	decoded = true;
 		}
 
-		console.log(result)
-
-	},
-
-	_extractMessageFromPacket : function(packetBuffer, offset) {
-		// first 8 bytes are two protobuf varint, defining cmd & message size
-		console.log(packetBuffer)
-		var cmdBuffer = packetBuffer.slice(0, 4);
-		var sizeBuffer = packetBuffer.slice(4, 8)
-
-		console.log(cmdBuffer, sizeBuffer)
-
-		var cmd = Varint.decode(cmdBuffer)
-			, size = Varint.decode(sizeBuffer);
-
-
-		//var cmd2 = Varint.decode(packetBuffer.slice(offset + 8 + size, offset + 16 + size));
-
-		console.log(packetBuffer)
-
-		console.log("yay", cmd, size)	
-		// var rawMessage = packetBuffer.slice(offset + 8, offset + 8 + size);
-		return packetBuffer.slice(offset + 4);
-
-		offset += 8 + size;
-		
+		cb(messages);
 	},
 
 	_extractRawPacket : function(packetLength) {
