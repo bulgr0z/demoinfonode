@@ -20,7 +20,25 @@ module.exports.prototype = {
 		7 : 'CNETMsg_SignonState',
 		6 : 'CNETMsg_SetConVar',
 		4 : 'CNETMsg_Tick',
-		12 : 'CSVCMsg_CreateStringTable'
+		9 : 'CSVCMsg_SendTable',
+		12 : 'CSVCMsg_CreateStringTable',
+		18 : 'CSVCMsg_SetView',
+		30 : 'CSVCMsg_GameEventList'
+	},
+
+	/**
+	 * TODO
+	 * Passthrough method, offsets the packet from the stream but does not decode it.
+	 */
+	decodeRawPacket : function(cb) {
+		// var cmdInfo = Structs.CmdInfo.decode(this.demoBuffer);
+		// console.log()
+		//this._decodeRawMessages(this.demoBuffer.getBuffer())
+		// console.log('RAW PACKET ?')
+
+		var cmdLength = Structs.CmdLength.decode(this.demoBuffer);
+		var rawData = this._extractRawPacket(cmdLength.value)
+		cb([]); // returns empty result
 	},
 
 	decodeNetPacket : function(cb) {
@@ -29,16 +47,14 @@ module.exports.prototype = {
 			, cmdLength = Structs.CmdLength.decode(this.demoBuffer)
 			, message = {};
 
-		// get a new buffer containing the message
-		var rawData = this._extractRawPacket(cmdLength.value);
-		var messages = this._decodeNetMessages(rawData, cb);
+		var rawData = this._extractRawPacket(cmdLength.value); // slice a new buffer containing the message
+		this._decodeRawMessages(rawData, cb); // decode every message from the packet and exec cb
 
-
-		console.log(rawData.length)
-		console.log('info', cmdInfo, 'sequence', cmdSequence, 'length', cmdLength);
+		// console.log(rawData.length)
+		// console.log('info', cmdInfo, 'sequence', cmdSequence, 'length', cmdLength);
 	},
 
-	_decodeNetMessages : function(packetBuffer, cb) {
+	_decodeRawMessages : function(packetBuffer, cb) {
 		var offset = 0 // progression through the packet
 			, messages = [];
 
@@ -57,13 +73,18 @@ module.exports.prototype = {
 			
 			var messageType = this.net_messages[cmd];
 			if (messageType) { // skip to the next message if type not found in net_messages
-				messages.push(this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + cmdSize))); // decode the message
+				// wrap the message in an object with the command as key
+				var wrappedMsg = {};
+				wrappedMsg[messageType] = this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + cmdSize));
+				messages.push(wrappedMsg); // decode the message
+
 				console.log('-- DECODING : ', messageType);
 			} else {
 				console.log('-- SKIPPING CMD ', cmd);
 			}
 			
 			offset += messageHeaderLength + messageLength;
+			//if (cmd == 9) console.log(messages)
 		}
 
 		cb(messages);
@@ -78,4 +99,4 @@ module.exports.prototype = {
 		return packet;
 	}
 
-}
+};

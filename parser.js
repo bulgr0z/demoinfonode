@@ -47,19 +47,27 @@ module.exports.prototype = {
 		this.output(header, "DEMO HEADER");
 	},
 
+	/**
+	 * Reads each `frame` of the demo (each frame containing 0 or more protobuf messages)
+	 *
+	 */
 	readNextFrame : function() {
 		var header = Structs.CmdHeader.decode(this.demoBuffer);
+
+		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', header)
 
 		switch (this.commands[header.cmd]) {
 			case 'packet' :
 			case 'signon' :
-				console.log('signon packet', this.demoBuffer.getCursor());
 
-				var message = this.messageDecoder.decodeNetPacket(function(messages) {
-					// console.log('JOB DONE ?')
-					// console.log(msg)
-					this.output(messages)
-				}.bind(this));
+				this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
+
+				// var message = this.messageDecoder.decodeNetPacket(function(messages) {
+				// 	// console.log('JOB DONE ?')
+				// 	// console.log(msg)
+				// 	this.output(messages);
+				// 	this.readNextFrame(); // get back to the loop
+				// }.bind(this));
 
 				// console.log(this.demoBuffer)
 				// var cmdinfo = Structs.CmdInfo.decode(this.demoBuffer);
@@ -74,11 +82,16 @@ module.exports.prototype = {
 			case 'stringtables' :
 			case 'datatables' :
 			case 'consolecmd' :
+				this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
 				break;
 
 			case 'syntick' :
+				this.output(header, 'SYNTICK');
+				this.readNextFrame(); // continue
 				break;
 		}
+
+
 
 		console.log('CMD : ', header);
 	},
@@ -93,10 +106,19 @@ module.exports.prototype = {
 		this._outputString(message, title)
 	},
 
+	/**
+	 * Generic callback used by readNextFrame when messages are decoded
+	 * Writes the received messages on the buffer and reads the next frame.
+	 */
+	_decodedFrameCallback : function(messages) {
+		this.output(messages, '-- PACKET --'); // write to buffer
+		this.readNextFrame(); // get back to the loop
+	},
+
 	_outputString : function(message, title) {				
 		var header = '';
 		if (typeof title === 'string') header = "----- " + title + "\n";
-		
+		console.log('write')
 		this.outputStream.write(header + JSON.stringify(message) + "\n\n");
 	}
 
