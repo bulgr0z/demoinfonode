@@ -1,16 +1,17 @@
-var Protobuf = require('protobufjs')
-	, Bytebuffer = Protobuf.Bytebuffer
-	, Long = Protobuf.Long
-	, Fs = require('fs')
-  , Varint = require('varint')
-  , Bufferpack = require('bufferpack')
-
-	//, Structs = require('./structs.js')
+// var Protobuf = require('protobufjs')
+// 	, Bytebuffer = Protobuf.Bytebuffer
+// 	, Long = Protobuf.Long
+//  , Varint = require('varint')
+//  , Bufferpack = require('bufferpack')
+var Fs = require('fs')
+  , argv = require('yargs').argv
 	, Parser = require('./parser.js')
   , Util = require('./utils.js');
 
-var demofile = "../demo/demo2.dem";
+var demofile = argv._[0];
 var bufferPointer;
+
+console.log(argv)
 
 var demoEvents = [];
 

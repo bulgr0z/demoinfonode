@@ -17,7 +17,10 @@ module.exports.prototype = {
 
 	net_messages : {
 		8 : 'CSVCMsg_ServerInfo',
-		4 : 'CNETMsg_Tick'
+		7 : 'CNETMsg_SignonState',
+		6 : 'CNETMsg_SetConVar',
+		4 : 'CNETMsg_Tick',
+		12 : 'CSVCMsg_CreateStringTable'
 	},
 
 	decodeNetPacket : function(cb) {
@@ -40,61 +43,44 @@ module.exports.prototype = {
 
 		var offset = 0 // progression through the packet
 			, decoded = false
-			, result = {};
+			, result = [];
 
-		var count = 0; // debug
+		//var count = 0; // debug
 		while (!decoded) {
-			var cmd = Varint.decode(packetBuffer.slice(offset, offset + 4));
-			var size = Varint.decode(packetBuffer.slice(offset + 4, offset + 8));
 
-			console.log("wut ?", cmd, size, offset)
-			if (cmd == 0) break; // 0 is not a valid cmd, need better error handling
-			if (count > 3) break; // debug
+			// each message starts with a header of 2 varint32 : 
+			// 	- command (corresponding to a protobuf message)
+			//  - message length
+			// Varints being of `variable` size, we need to keep track of the header size to slice the message
+			var cmd = Varint.decode(packetBuffer.slice(offset))
+				, cmdSize = Varint.decode.bytes // header cmd size
+				, messageLength = Varint.decode(packetBuffer.slice(offset + cmdSize)) // 
+				, messageHeaderLength = cmdSize + Varint.decode.bytes; // ... + bytes needed for messageLength
+
+		
+			if (cmd <= 0 || typeof cmd === "undefined") break; // 0 is not a valid cmd, need better error handling
+			//if (count > 3) break; // debug
 
 			var messageType = this.net_messages[cmd];
-			console.log('COMMAND: ', messageType, cmd, offset+4)
-			result[messageType] = this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + 4)); // decode the message
-			offset = offset + 8 + result[messageType].calculate(); // offset the command and message length 
+			if (messageType) { // skip to the next message if type not found in net_messages
+				result.push(this.protobuf[messageType].decodeDelimited(packetBuffer.slice(offset + cmdSize))); // decode the message
+				console.log('-- DECODING : ', messageType);
+			} else {
+				console.log('-- SKIPPING CMD ', cmd);
+			}
+			
+			offset += messageHeaderLength + messageLength;
+			//offset = offset + 8 + result[messageType].calculate(); // offset the command and message length 
 
-			console.log(result, offset, result[messageType].calculate())
-			count ++ // debug
+			// console.log("RESULT ", result)
+			// console.log("MESSAGE LENGTH ", result[messageType].calculate())
+			// console.log("NEW OFFSET ", offset);
+
+			//count ++ // debug
 			//	decoded = true;
 		}
 
-		// function getMessageCommand(packetBuffer) {
-		// 	return packetBuffer.slice(0, 4);
-		// };
-
-		// function decodeMessage(message) {
-		// 	console.log(this.protobuf)
-		// };
-
-		// var message = this._extractMessageFromPacket(packetBuffer, offset);
-		// console.log(message.length)
-
-		// try {
-		// 	//var decoded = this.protobuf.CSVCMsg_ServerInfo.decode(message);
-		// 	var decoded = this.protobuf.CSVCMsg_ServerInfo.decodeDelimited(message)
-		// } catch(e) {
-		// 	console.log(e, e.decoded);
-		// }
-		// console.log(decoded);
-		// console.log(decoded.calculate());
-		// csgo.CSVCMsg_UserMessage.decode(data);
-
-		//console.log(offset)
-
-		// var cmd = packetBuffer.readUInt32LE(0);
-		// var size = packetBuffer.readUInt32LE(4);
-		// console.log('cmd: ', cmd, '| size: ', size);
-		// var cmd = Varint.decode(packetBuffer.slice(0, 4));
-		// var size = Varint.decode(packetBuffer.slice(4, 8));
-
-		// var cmd2 = Varint.decode(packetBuffer.slice(8+size, 16+size));
-		// var size2 = Varint.decode(packetBuffer.slice(16+size, 20+size));
-		// console.log('cmd: ', cmd, '| size: ', size);
-		// console.log('cmd2: ', cmd2, '| size2: ', size2);
-
+		console.log(result)
 
 	},
 
