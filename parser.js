@@ -1,5 +1,6 @@
 var Structs = require('./structs.js')
-	, MessageDecoder = require('./messagedecoder.js');
+	, MessageDecoder = require('./messagedecoder.js')
+	, Q = require('q');
 
 module.exports = function(demoBuffer, outputStream) {
 	
@@ -10,8 +11,13 @@ module.exports = function(demoBuffer, outputStream) {
 
 	this.readHeader();
 
+	this.loop(this.readNextFrame.bind(this)).then(function() {
+		console.log('WTF DONE ?')
+	}).catch(function(e) {
+		console.log('BAD STUFF ', e)
+	});
 	// start parser loop
-	this.readNextFrame();
+	//this.readNextFrame();
 
 	// bad bloquant ? des events ca serait plus cool
 	// while (!this.demoEnded) {
@@ -55,12 +61,18 @@ module.exports.prototype = {
 		var header = Structs.CmdHeader.decode(this.demoBuffer);
 
 		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', header)
+		
+		// var promiseNextFrame = Q.promise(function() {
+		// 	this.output(messages, '-- PACKET --'); // write to buffer
+		// 	this.readNextFrame(); // get back to the loop
+		// }.bind(this));
 
 		switch (this.commands[header.cmd]) {
 			case 'packet' :
 			case 'signon' :
 
-				this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
+				// this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
+				return this.messageDecoder.decodeNetPacket()
 
 				// var message = this.messageDecoder.decodeNetPacket(function(messages) {
 				// 	// console.log('JOB DONE ?')
@@ -76,24 +88,36 @@ module.exports.prototype = {
 				break; 
 
 			case 'stop' : 
-
+				console.log('DEMO END ! this silly parser made it.')
 				break;
 
 			case 'stringtables' :
 			case 'datatables' :
 			case 'consolecmd' :
-				this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
+
+				return this.messageDecoder.decodeRawPacket();
+				//this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
 				break;
 
 			case 'syntick' :
-				this.output(header, 'SYNTICK');
-				this.readNextFrame(); // continue
+				// this.output(header, 'SYNTICK');
+				// this.readNextFrame(); // continue
+				var dummy = Q.defer();
+				dummy.resolve([]); // dummy, was breaking the loop
+				return dummy.promise;
 				break;
 		}
 
 
 
 		console.log('CMD : ', header);
+	},
+
+	loop : function(cb) {
+		console.log('THEN	 !', cb)
+		return cb().then(function() {
+			return this.loop(cb);
+		}.bind(this));
 	},
 
 	// called on the last frame / error
