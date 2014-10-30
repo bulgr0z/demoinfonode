@@ -1,5 +1,6 @@
 var Structs = require('./structs.js')
-	, MessageDecoder = require('./messagedecoder.js');
+	, MessageDecoder = require('./messagedecoder.js')
+	, Q = require('q');
 
 module.exports = function(demoBuffer, outputStream) {
 	
@@ -10,8 +11,11 @@ module.exports = function(demoBuffer, outputStream) {
 
 	this.readHeader();
 
+	this.loop(this.readNextFrame).then(function() {
+		console.log('WTF DONE ?')
+	});
 	// start parser loop
-	this.readNextFrame();
+	//this.readNextFrame();
 
 	// bad bloquant ? des events ca serait plus cool
 	// while (!this.demoEnded) {
@@ -55,6 +59,11 @@ module.exports.prototype = {
 		var header = Structs.CmdHeader.decode(this.demoBuffer);
 
 		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', header)
+		
+		// var promiseNextFrame = Q.promise(function() {
+		// 	this.output(messages, '-- PACKET --'); // write to buffer
+		// 	this.readNextFrame(); // get back to the loop
+		// }.bind(this));
 
 		switch (this.commands[header.cmd]) {
 			case 'packet' :
@@ -94,6 +103,12 @@ module.exports.prototype = {
 
 
 		console.log('CMD : ', header);
+	},
+
+	loop : function(cb) {
+		return cb().then(function() {
+			return this.loop(cb);
+		}.bind(this));
 	},
 
 	// called on the last frame / error
