@@ -11,8 +11,10 @@ module.exports = function(demoBuffer, outputStream) {
 
 	this.readHeader();
 
-	this.loop(this.readNextFrame).then(function() {
+	this.loop(this.readNextFrame.bind(this)).then(function() {
 		console.log('WTF DONE ?')
+	}).catch(function(e) {
+		console.log('BAD STUFF ', e)
 	});
 	// start parser loop
 	//this.readNextFrame();
@@ -69,7 +71,8 @@ module.exports.prototype = {
 			case 'packet' :
 			case 'signon' :
 
-				this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
+				// this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
+				return this.messageDecoder.decodeNetPacket()
 
 				// var message = this.messageDecoder.decodeNetPacket(function(messages) {
 				// 	// console.log('JOB DONE ?')
@@ -85,18 +88,23 @@ module.exports.prototype = {
 				break; 
 
 			case 'stop' : 
-
+				console.log('DEMO END ! this silly parser made it.')
 				break;
 
 			case 'stringtables' :
 			case 'datatables' :
 			case 'consolecmd' :
-				this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
+
+				return this.messageDecoder.decodeRawPacket();
+				//this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
 				break;
 
 			case 'syntick' :
-				this.output(header, 'SYNTICK');
-				this.readNextFrame(); // continue
+				// this.output(header, 'SYNTICK');
+				// this.readNextFrame(); // continue
+				var dummy = Q.defer();
+				dummy.resolve([]); // dummy, was breaking the loop
+				return dummy.promise;
 				break;
 		}
 
@@ -106,6 +114,7 @@ module.exports.prototype = {
 	},
 
 	loop : function(cb) {
+		console.log('THEN	 !', cb)
 		return cb().then(function() {
 			return this.loop(cb);
 		}.bind(this));

@@ -34,7 +34,7 @@ module.exports.prototype = {
 	decodeRawPacket : function() {
 		// var cmdInfo = Structs.CmdInfo.decode(this.demoBuffer);
 		// console.log()
-		//this._decodeRawMessages(this.demoBuffer.getBuffer())
+		// this._decodeRawMessages(this.demoBuffer.getBuffer())
 		// console.log('RAW PACKET ?')
 		var decoded = Q.defer();
 
@@ -45,20 +45,23 @@ module.exports.prototype = {
 		return decoded.promise;
 	},
 
-	decodeNetPacket : function(cb) {
+	decodeNetPacket : function() {
 		var cmdInfo = Structs.CmdInfo.decode(this.demoBuffer)
 			, cmdSequence = Structs.CmdSequence.decode(this.demoBuffer)
 			, cmdLength = Structs.CmdLength.decode(this.demoBuffer)
-			, message = {};
+			, message = {}
+			, decoded = Q.defer();
 
 		var rawData = this._extractRawPacket(cmdLength.value); // slice a new buffer containing the message
-		this._decodeRawMessages(rawData, cb); // decode every message from the packet and exec cb
+		
+		this._decodeRawMessages(rawData, decoded); // decode every message from the packet and exec cb
+		return decoded.promise;
 
 		// console.log(rawData.length)
 		// console.log('info', cmdInfo, 'sequence', cmdSequence, 'length', cmdLength);
 	},
 
-	_decodeRawMessages : function(packetBuffer, cb) {
+	_decodeRawMessages : function(packetBuffer, decodePromise) {
 		var offset = 0 // progression through the packet
 			, messages = [];
 
@@ -91,7 +94,8 @@ module.exports.prototype = {
 			//if (cmd == 9) console.log(messages)
 		}
 
-		cb(messages);
+		decodePromise.resolve(messages);
+		//cb(messages);
 	},
 
 	_extractRawPacket : function(packetLength) {
