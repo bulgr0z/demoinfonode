@@ -2,7 +2,16 @@ var Structs = require('./structs.js')
 	, MessageDecoder = require('./messagedecoder.js')
 	, Q = require('q');
 
-module.exports = function(demoBuffer, outputStream) {
+/**
+ * Parses and extracts packets from the demofile.
+ * The parser will decode basic structs (eg. header) and delegate the packets containing
+ * protobuf messages to MessageDecoder 
+ *
+ * @constructor
+ * @param {Buffer} demoBuffer - raw demoBuffer
+ * @param {Stream} outputStream - stream to output parsed packets on
+ */
+var Parser = function(demoBuffer, outputStream) {
 	
 	this.demoBuffer = demoBuffer;
 	this.outputStream = outputStream;
@@ -23,7 +32,7 @@ module.exports = function(demoBuffer, outputStream) {
 		9 : 0
 	};
 
-	this.loop(this.readNextFrame.bind(this)).then(function() {
+	this.loop(this.readNextPacket.bind(this)).then(function() {
 		console.log('WTF DONE ?')
 	}).catch(function(e) {
 		console.log('BAD STUFF ', e)
@@ -38,13 +47,12 @@ module.exports = function(demoBuffer, outputStream) {
 
 };
 
-module.exports.prototype = {
+Parser.prototype = {
 	
 	demoBuffer : null,
 	outputStream : null,
 	demoEnded : false,
 	isValidDemo : false,
-	//preferedOutput : "string",
 
 	commands : {
 		1 : 'signon',
@@ -69,10 +77,10 @@ module.exports.prototype = {
 	 * Reads each `frame` of the demo (each frame containing 0 or more protobuf messages)
 	 *
 	 */
-	readNextFrame : function() {
-		var header = Structs.CmdHeader.decode(this.demoBuffer);
+	readNextPacket : function() {
+		var packetMetadata = Structs.PacketMetadata.decode(this.demoBuffer);
 
-		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', header)
+		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', packetMetadata)
 		
 		// var promiseNextFrame = Q.promise(function() {
 		// 	this.output(messages, '-- PACKET --'); // write to buffer
@@ -85,9 +93,9 @@ module.exports.prototype = {
 
 		// }
 
-		this.packetCount[header.cmd] += 1;
+		this.packetCount[packetMetadata.cmd] += 1;
 
-		switch (this.commands[header.cmd]) {
+		switch (this.commands[packetMetadata.cmd]) {
 			case 'packet' :
 			case 'signon' :
 
@@ -142,7 +150,7 @@ module.exports.prototype = {
 
 
 		console.log("packet count : ", this.packetCount)
-		console.log('CMD : ', header);
+		console.log('CMD : ', packetMetadata);
 	},
 
 	loop : function(cb) {
@@ -164,12 +172,12 @@ module.exports.prototype = {
 	},
 
 	/**
-	 * Generic callback used by readNextFrame when messages are decoded
+	 * Generic callback used by readNextPacket when messages are decoded
 	 * Writes the received messages on the buffer and reads the next frame.
 	 */
 	_decodedFrameCallback : function(messages) {
 		this.output(messages, '-- PACKET --'); // write to buffer
-		this.readNextFrame(); // get back to the loop
+		this.readNextPacket(); // get back to the loop
 	},
 
 	_outputString : function(message, title) {				
@@ -181,3 +189,4 @@ module.exports.prototype = {
 
 };
 
+module.exports = Parser;

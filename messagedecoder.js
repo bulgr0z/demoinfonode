@@ -10,11 +10,11 @@ var Structs = require('./structs.js')
  * All decoders return a promise object which will contain the resolved messages.
  *
  * @constructor
- * @param {object} demoBuffer - raw packet sliced from the buffer
+ * @param {Buffer} demoBuffer - raw packet sliced from the buffer
  */
 var MessageDecoder = function(demoBuffer) {
 	this.demoBuffer = demoBuffer;
-	// loading cstrike15_usermessages also imports netmessages_public
+	// loading cstrike15_usermessages proto file also imports netmessages_public
 	var builder = Protobuf.loadProtoFile("./protobuf/cstrike15_usermessages.proto");
 	this.protobuf = builder.build();
 };
@@ -46,7 +46,7 @@ MessageDecoder.prototype = {
 		// console.log('RAW PACKET ?')
 		var decoded = Q.defer();
 
-		var cmdLength = Structs.CmdLength.decode(this.demoBuffer);
+		var cmdLength = Structs.PacketLength.decode(this.demoBuffer);
 		var rawData = this._extractRawPacket(cmdLength.value);
 		
 		decoded.resolve([]); // dummy result
@@ -54,9 +54,9 @@ MessageDecoder.prototype = {
 	},
 
 	decodeNetPacket : function() {
-		var cmdInfo = Structs.CmdInfo.decode(this.demoBuffer)
-			, cmdSequence = Structs.CmdSequence.decode(this.demoBuffer)
-			, cmdLength = Structs.CmdLength.decode(this.demoBuffer)
+		var cmdInfo = Structs.PacketInfo.decode(this.demoBuffer)
+			, cmdSequence = Structs.PacketSequence.decode(this.demoBuffer)
+			, cmdLength = Structs.PacketLength.decode(this.demoBuffer)
 			, message = {}
 			, decoded = Q.defer();
 
