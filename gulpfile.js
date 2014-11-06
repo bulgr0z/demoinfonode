@@ -5,6 +5,8 @@ gulp.task('default', function() {
   console.log("gulped ?")
 
   gulp.src("./*.js")
-  	.pipe(jsdoc('./docs'));
+  	.pipe(jsdoc('./docs', {}, '', {
+  		showPrivate: true
+  	}));
 
 });

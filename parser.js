@@ -3,9 +3,9 @@ var Structs = require('./structs.js')
 	, Q = require('q');
 
 /**
- * Parses and extracts packets from the demofile.
- * The parser will decode basic structs (eg. header) and delegate the packets containing
- * protobuf messages to MessageDecoder 
+ * Loops through demo packets, parses their metadata and calls the appropriate decoder to extract and
+ * read the messages contained in them.
+ * Will also handle standard .dem structs (eg. dem start, dem header, dem stop)
  *
  * @constructor
  * @param {Buffer} demoBuffer - raw demoBuffer
@@ -80,7 +80,7 @@ Parser.prototype = {
 	readNextPacket : function() {
 		var packetMetadata = Structs.PacketMetadata.decode(this.demoBuffer);
 
-		console.log('+++ READING NEW FRAME. HEADER COMMAND : ', packetMetadata)
+		console.log('+++ READING NEW PAKCET METADATA. HEADER COMMAND : ', packetMetadata)
 		
 		// var promiseNextFrame = Q.promise(function() {
 		// 	this.output(messages, '-- PACKET --'); // write to buffer
@@ -100,7 +100,9 @@ Parser.prototype = {
 			case 'signon' :
 
 				// this.messageDecoder.decodeNetPacket(this._decodedFrameCallback.bind(this))
-				return this.messageDecoder.decodeNetPacket()
+				// return this.messageDecoder.decodeNetPacket()
+
+				return this.messageDecoder.decodeNextPacket("net");
 
 				// var message = this.messageDecoder.decodeNetPacket(function(messages) {
 				// 	// console.log('JOB DONE ?')
@@ -135,7 +137,7 @@ Parser.prototype = {
 			case 'datatables' :
 			case 'consolecmd' :
 
-				return this.messageDecoder.decodeRawPacket();
+				return this.messageDecoder.decodeNextPacket('data');
 				//this.messageDecoder.decodeRawPacket(this._decodedFrameCallback.bind(this));
 				break;
 
