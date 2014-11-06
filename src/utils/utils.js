@@ -13,7 +13,7 @@ module.exports = {
   trimObject : function(obj) {
   	for (var item in obj) {
   		if (typeof obj[item] === 'string') {
-  			obj[item] = this.trimString(obj[item])
+  			obj[item] = this.trimString(obj[item]);
   		}
   	}
   	return obj;

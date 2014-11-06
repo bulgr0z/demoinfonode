@@ -5,8 +5,8 @@
 //  , Bufferpack = require('bufferpack')
 var Fs = require('fs')
   , argv = require('yargs').argv
-	, Parser = require('./parser.js')
-  , Util = require('./utils.js');
+	, Parser = require('./src/core/parser.js')
+  , Util = require('./src/utils/utils.js');
 
 var demofile = argv._[0];
 var bufferPointer;

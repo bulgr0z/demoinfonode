@@ -1,4 +1,4 @@
-var Structs = require('./structs.js')
+var Structs = require('../utils/structs.js')
 	, MessageDecoder = require('./messagedecoder.js')
 	, Q = require('q');
 
@@ -68,9 +68,7 @@ Parser.prototype = {
 	
 	readHeader : function() {
 		var header = Structs.Header.decode(this.demoBuffer);
-		if (header.demoType === 'HL2DEMO') this.isValidDemo = true;
-
-		this.output(header, "DEMO HEADER");
+		if (header.demoType === 'HL2DEMO') this.isValidDemo = true; // pls no dota
 	},
 
 	/**
@@ -82,17 +80,6 @@ Parser.prototype = {
 
 		console.log('+++ READING NEW PAKCET METADATA. HEADER COMMAND : ', packetMetadata)
 		
-		// var promiseNextFrame = Q.promise(function() {
-		// 	this.output(messages, '-- PACKET --'); // write to buffer
-		// 	this.readNextFrame(); // get back to the loop
-		// }.bind(this));
-		
-		// if (this.commands[header.cmd] == 5) {
-		// 	console.log('5555555555')
-		// 	process.exit(code=0);
-
-		// }
-
 		this.packetCount[packetMetadata.cmd] += 1;
 
 		switch (this.commands[packetMetadata.cmd]) {
@@ -115,7 +102,7 @@ Parser.prototype = {
 				// var cmdinfo = Structs.CmdInfo.decode(this.demoBuffer);
 				// console.log(cmdinfo)
 				// console.log(this.demoBuffer)
-				break; 
+				break;
 
 			case 'usercmd' : 
 

@@ -1,4 +1,4 @@
-var Structs = require('./structs.js')
+var Structs = require('../utils/structs.js')
 	, Varint = require('varint')
 	, Protobuf = require('protobufjs')
 	, Bytebuffer = Protobuf.Bytebuffer
@@ -15,7 +15,7 @@ var Structs = require('./structs.js')
 var MessageDecoder = function(demoBuffer) {
 	this.demoBuffer = demoBuffer;
 	// loading cstrike15_usermessages proto file also imports netmessages_public
-	var builder = Protobuf.loadProtoFile("./protobuf/cstrike15_usermessages.proto");
+	var builder = Protobuf.loadProtoFile("../protobuf/cstrike15_usermessages.proto");
 	this.protobuf = builder.build();
 };
 
