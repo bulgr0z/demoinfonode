@@ -10,13 +10,15 @@ var Structs = require('../utils/structs.js')
  * @constructor
  * @param {Buffer} demoBuffer - raw demoBuffer
  * @param {Stream} outputStream - stream to output parsed packets on
+ * @param {Stats} stats - Object to report stats to
  */
-var Parser = function(demoBuffer, outputStream) {
+var Parser = function(demoBuffer, outputStream, stats) {
 	
 	this.demoBuffer = demoBuffer;
 	this.outputStream = outputStream;
+	this.stats = stats;
 
-	this.messageDecoder = new MessageDecoder(this.demoBuffer);
+	this.messageDecoder = new MessageDecoder(this.demoBuffer, stats);
 
 	this.readHeader();
 
@@ -80,7 +82,8 @@ Parser.prototype = {
 
 		console.log('+++ READING NEW PAKCET METADATA. HEADER COMMAND : ', packetMetadata)
 		
-		this.packetCount[packetMetadata.cmd] += 1;
+		this.stats.add("packet", packetMetadata);
+		//this.packetCount[packetMetadata.cmd] += 1;
 
 		switch (this.commands[packetMetadata.cmd]) {
 			case 'packet' :
@@ -106,18 +109,12 @@ Parser.prototype = {
 
 			case 'usercmd' : 
 
-			// ECstrike15UserMessages: 
-			//   { CS_UM_VGUIMenu: 1,
-			//     CS_UM_Geiger: 2,
-			//     CS_UM_Train: 3,
-			//     CS_UM_HudText: 4,
-			//     CS_UM_SayText: 5,
-
 				console.log('USER CMD !')
 				break;
 
 			case 'stop' : 
 				console.log('DEMO END ! this silly parser made it.')
+				console.log(this.stats.packetCount)
 				break;
 
 			case 'stringtables' :
@@ -138,8 +135,8 @@ Parser.prototype = {
 		}
 
 
-		console.log("packet count : ", this.packetCount)
-		console.log('CMD : ', packetMetadata);
+		//console.log("packet count : ", this.packetCount)
+		//console.log('CMD : ', packetMetadata);
 	},
 
 	loop : function(cb) {

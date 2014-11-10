@@ -11,8 +11,9 @@ var Structs = require('../utils/structs.js')
  *
  * @constructor
  * @param {Buffer} demoBuffer - DemoBuffer object to read/offset the packets from
+ * @param {Stats} stats - Object to report stats to
  */
-var MessageDecoder = function(demoBuffer) {
+var MessageDecoder = function(demoBuffer, stats) {
 	this.demoBuffer = demoBuffer;
 	// loading cstrike15_usermessages proto file also imports netmessages_public
 	var builder = Protobuf.loadProtoFile("../protobuf/cstrike15_usermessages.proto");

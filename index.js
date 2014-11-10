@@ -6,6 +6,7 @@
 var Fs = require('fs')
   , argv = require('yargs').argv
 	, Parser = require('./src/core/parser.js')
+	, Stats = require('./src/utils/stats.js')
   , Util = require('./src/utils/utils.js');
 
 var demofile = argv._[0];
@@ -24,7 +25,8 @@ Fs.readFile(demofile, function (err, data) {
 	  mode: 0666 
 	});
 
-	var parser = new Parser(demoBuffer, outputStream);	
+	var stats = new Stats("json");
+	var parser = new Parser(demoBuffer, outputStream, stats);	
 	// outputStream.once('open', function(descriptor) {
 	// });
 
