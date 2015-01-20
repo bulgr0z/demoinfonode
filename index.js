@@ -1,72 +1,70 @@
-// var Protobuf = require('protobufjs')
-// 	, Bytebuffer = Protobuf.Bytebuffer
-// 	, Long = Protobuf.Long
-//  , Varint = require('varint')
-//  , Bufferpack = require('bufferpack')
 var Fs = require('fs')
   , argv = require('yargs').argv
-	, Parser = require('./src/core/parser.js')
-	, Stats = require('./src/utils/stats.js')
-  , Util = require('./src/utils/utils.js');
+  , Winston = require('winston')
+  , DemoStream = require('./src/core/demostream.js');
+	// , Parser = require('./src/core/parser.js')
+	// , Stats = require('./src/utils/stats.js')
+ //  , Util = require('./src/utils/utils.js');
 
 var demofile = argv._[0];
 var bufferPointer;
 
-console.log(argv)
+// console.log(argv)
+
+var logger = new (Winston.Logger)({
+  transports: [
+    new (Winston.transports.Console)(),
+    new (Winston.transports.File)({ filename: 'execution.log' })
+  ]
+});
 
 var demoEvents = [];
 
-Fs.readFile(demofile, function (err, data) {
+var entrystream = Fs.createReadStream('/Volumes/MecanicalHD/Dropbox/dev/csgo/demo/demo.dem');
+var demoStream = new DemoStream();
 
-	var demoBuffer = new DemoBuffer(data);
-	var outputStream = Fs.createWriteStream('./results/results.txt', { 
-		flags: 'w',
-	  encoding: 'utf8',
-	  mode: 0666 
-	});
-
-	var stats = new Stats("json");
-	var parser = new Parser(demoBuffer, outputStream, stats);	
-	// outputStream.once('open', function(descriptor) {
-	// });
-
-	
-	//console.log(parser);
-
-	// var demoHeader = demoBuffer.slice(0, 1072);
-	// console.log(demoHeader);
-	// console.log(demoBuffer);
-	//var decoded = Bufferpack.unpack(format, demoHeader, 0);
-
-	// console.log(demoBuffer);
-	// var header = Structs.Header.decode(demoBuffer);
-	// console.log(header);
-	// console.log(demoBuffer);
-
-	//console.log(decoded);
-
+//demoStream.pipe(entrystream)
+entrystream.pipe(demoStream).on('header', function(data) {
+	console.log('header !', data);
+	// entrystream.pause()
 });
 
-/**
- * Wraps our file buffer in an object containing the buffer, a cursor indicating
- * the current position and accessor methods.
- */
-var DemoBuffer = function(buffer) {
-	this.buffer = buffer;
-};
-DemoBuffer.prototype = {
-	buffer : null,
-	cursor : 0,
 
-	getBuffer : function() {
-		return this.buffer;
-	},
+// entrystream.pipe(demoStream).on('data', function() {
+// 	console.log('wut')
+// });
 
-	setOffset : function(offset) {
-		this.cursor += offset;
-	},
+// demoStream._read();
 
-	getCursor : function() {
-		return this.cursor;
-	}
-};
+// Fs.readFile(demofile, function (err, data) {
+
+// 	var demoBuffer = new DemoBuffer(data);
+// 	var outputStream = Fs.createWriteStream('./results/results.txt', {
+// 		flags: 'w',
+// 	  encoding: 'utf8',
+// 	  mode: 0666
+// 	});
+
+// 	var stats = new Stats("json");
+// 	var parser = new Parser(demoBuffer, outputStream, stats);	
+// 	// outputStream.once('open', function(descriptor) {
+// 	// });
+
+	
+// 	//console.log(parser);
+
+// 	// var demoHeader = demoBuffer.slice(0, 1072);
+// 	// console.log(demoHeader);
+// 	// console.log(demoBuffer);
+// 	//var decoded = Bufferpack.unpack(format, demoHeader, 0);
+
+// 	// console.log(demoBuffer);
+// 	// var header = Structs.Header.decode(demoBuffer);
+// 	// console.log(header);
+// 	// console.log(demoBuffer);
+
+// 	//console.log(decoded);
+
+// });
+
+
