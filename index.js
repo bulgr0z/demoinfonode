@@ -29,6 +29,12 @@ entrystream.pipe(demoStream).on('header', function(data) {
 	// entrystream.pause()
 });
 
+entrystream.pipe(demoStream).on('data', function(data) {
+	console.log('Data !? !', data);
+
+	// process.exit(0)
+	// entrystream.pause()
+});
 
 // entrystream.pipe(demoStream).on('data', function() {
 // 	console.log('wut')

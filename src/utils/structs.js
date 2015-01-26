@@ -39,8 +39,8 @@ var Structs = {
 	PacketInfo : {
 		// cmdinfo should be the first int32 found
 		// 152B = 72x2 (for splitscreen)
-		length : 164,
-		format : "<I(command)148s(playerinfo)I(in)I(out)i(size)"
+		length : 170,
+		format : "<B(cmdtype)I(tick)B(playerSlot)<I(command)148s(playerinfo)I(in)I(out)i(size)"
 	},
 
 	/**

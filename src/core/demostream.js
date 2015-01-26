@@ -18,13 +18,15 @@ var Util = require('util')
  * @param {Object} options Stream.Transform options
  */
 var DemoStream = function(demopath, options) {
-	Stream.Transform.call(this, {});
+	Stream.Transform.call(this, {objectMode: true});
 	console.log('constructed DemoStream')
 
 	// 1 or more buffer slices
 	this.slices = [];
 	// current packet header
-	this.packetHeader;
+	this.packetHeader = null;
+	// raw data to be decoded
+	this.rawPacketData = null;
 };
 
 Util.inherits(DemoStream, Stream.Transform);
@@ -48,6 +50,7 @@ DemoStream.prototype.TICK = -1; // -1 : not started / 0 demo header / 1+ ticks
 
 DemoStream.prototype._transform = function(chunk, encoding, done) {
 	// console.log('chunk ! Length : ', chunk.length);
+	console.log('---------- TRANSFORM ')
 
 	this.iterateChunk(chunk, done); // ?
 
@@ -92,56 +95,102 @@ DemoStream.prototype.iterateChunk = function(chunk, done) {
 		done();
 	}
 
-	// new packet, no header. Probably demo start
-	if (this.isNewPacket() && !this.hasHeader()) {
-		slicedChunk = this.extractPacketHeader(chunk);
-		// not enough data in chunk, wait for another one
-		if (!slicedChunk) return done();
+	console.log('---------- ITERATING ')
 
+	// No packet header yet, try to decode one
+	if (!this.hasHeader()) {
+		// extract the header, get back the remaining data
+		chunk = this.extractPacketHeader(chunk);
+		// not enough data in the chunk, return to get another one
+		if (chunk === null) return done();
+
+		// special case for the demo header. Emit & return early as
+		// no protobuff data is expected after it.
 		if (!this.isGameStarted()) {
-			// Demo header; emit it and return to read another chunk since
-			// no protobuff data is attached to this header.
 			this.emit('header', this.packetHeader);
 			this.setTick(0); // start reading real packets
-			return this.iterateChunk(slicedChunk, done);
-		} else {
-			// Packet header
-			console.log('packet info ', this.packetHeader)
-			process.exit(0)
+			this.packetHeader = null; // reset packet header
+			return this.iterateChunk(chunk, done);
 		}
 	}
-	// new packet, has header; extract data
-	if (this.isNewPacket() && this.hasHeader()) {
-		chunk = this.extractPacketData(chunk);
-		console.log('new packet ! ', this.packetHeader, chunk.length);
-		process.exit(1);
-	}
+	console.log('lenth before ', chunk.length)
+	// At this point, we must have at least a bit of usable raw data
+	chunk = this.extractRawPacketData(chunk);
+	//process.exit(0)
+	if (chunk === null) return done(); // not enough data
+	console.log('lenth after ', chunk.length)
+	// TODO !
+	// Here, decode the packet message before emit >.>
+	var decoded = this.getDecodedPacket()
+	console.log(decoded)
+	this.push(decoded); // send packet
+
+	this.packetHeader = null;
+	this.rawPacketData = null;
 
 	return this.iterateChunk(chunk, done);
 };
 
-// Extract (if possible) the packet's header from the chunk and return
+// OBSOLETE DESC Extract (if possible) the packet's header from the chunk and return
 // the remaining chunk data. If packet can't be extracted, stash the data
 // and return null
 DemoStream.prototype.extractPacketHeader = function(chunk) {
-	var dataLength = this.isGameStarted() ?
+	console.log('extractPacketHeader')
+
+	// minimal required data length
+	var expectedLength = this.isGameStarted() ?
 		Structs.PacketInfo.length :
 		Structs.Header.length;
-
-	if (dataLength > chunk.length) {
+	// expected available buffer size (adding slices if any)
+	var availableLength = this.getSlicesLength() + chunk.length;
+	if (availableLength >= expectedLength) {
+		console.log('CONCAT HEADER expected HEADER ', expectedLength, 'available HEADER ', availableLength, this.slices.length)
+		chunk = Buffer.concat(this.slices.concat(chunk));
+		this.slices = []; // reset slices
+	} else {
+		console.log('STASH HEADER expected HEADER ', expectedLength, 'available HEADER ', availableLength, this.slices.length)
+		// not enough data, add the chunk to the slices and return
 		this.slices.push(chunk);
-		return null; // chunk too small, can't extract a header
+		return null;
 	}
-	console.log('length before ', chunk.length)
+	// decode and set packet header
 	this.packetHeader = this.isGameStarted() ?
 		Structs.PacketInfo.decode(chunk) :
 		Structs.Header.decode(chunk);
-
-	return chunk.slice(dataLength);
+	// return the remaining chunk data
+	return chunk.slice(expectedLength);
 };
 
-DemoStream.prototype.extractPacketData = function() {
-	console.log('lol extract data')
+DemoStream.prototype.extractRawPacketData = function(chunk) {
+// console.log('extractRawPacketData', this.packetHeader)
+// process.exit(0)
+	var expectedLength = this.packetHeader.size;
+	var availableLength = this.getSlicesLength() + chunk.length;
+	if (availableLength >= expectedLength) {
+		console.log('CONCAT PACKET expected PACKET ', expectedLength, 'available PACKET ', availableLength, this.slices.length)
+		chunk = Buffer.concat(this.slices.concat(chunk));
+		this.slices = []; // reset slices
+	} else {
+		console.log('STASH PACKET expected PACKET ', expectedLength, 'available PACKET ', availableLength, this.slices.length)
+		// not enough data, add the chunk to the slices and return
+		this.slices.push(chunk);
+		return null;
+	}
+	// extract the raw packet
+	this.rawPacketData = chunk.slice(0, expectedLength);
+	console.log('got raw packet of size ', expectedLength)
+	// return the remaining data
+	return chunk.slice(expectedLength);
+};
+
+// Passes the raw packet data & header to the MessageDecoder
+// return the decoded message as an object
+DemoStream.prototype.getDecodedPacket = function() {
+	var decodedPacket = {
+		header: this.packetHeader,
+		data: null // this.rawPacketData
+	}
+	return decodedPacket;
 };
 
 DemoStream.prototype.loop = function() {
@@ -166,12 +215,21 @@ DemoStream.prototype.getTick = function() {
 	return this.TICK;
 };
 
-DemoStream.prototype.isNewPacket = function() {
-	return this.slices.length === 0;
+// get the total length of all the stashed slices
+DemoStream.prototype.getSlicesLength = function() {
+	var length = 0;
+	this.slices.forEach(function(slice) {
+		length = slice.length
+	});
+	return length;
+};
+
+DemoStream.prototype.hasSlices = function() {
+	return this.slices.length > 0;
 };
 
 DemoStream.prototype.hasHeader = function() {
-	return this.packetHeader === null;
+	return this.packetHeader !== null;
 };
 
 // DemoStream.prototype = {
