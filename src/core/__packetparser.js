@@ -3,6 +3,7 @@ var Util = require('util')
 	, Q = require('q')
 	, _ = require('lodash')
 	, Structs = require('../utils/structs.js')
+	, Parser = require('./parser.js')
 	, fs = require('fs');
 
 
@@ -27,6 +28,8 @@ var DemoStream = function(demopath, options) {
 	this.packetHeader = null;
 	// raw data to be decoded
 	this.rawPacketData = null;
+
+	this.parser = new Parser();
 };
 
 Util.inherits(DemoStream, Stream.Transform);
@@ -52,37 +55,38 @@ DemoStream.prototype._transform = function(chunk, encoding, done) {
 	// console.log('chunk ! Length : ', chunk.length);
 	console.log('---------- TRANSFORM ')
 
-	this.iterateChunk(chunk, done); // ?
+	// Utilise un Parser qui se charge de la boucle
+	// Envoie un chunk et une promise au parser, le parser résoud
+	// la promise avec le reste du chunk. C'est DemoStream qui se
+	// charge de stash/concat les chunks
 
+	var parsedPacket = this.parser.parse(chunk);
 
+	// this.iterateChunk(chunk, done); // ?
 
-	// var minChunkLength;
-	// New packet, no chunks stashed. Need to get a header
-	// if (this.isNewPacket()) {
-	// 	// this.getNewPacket(chunk, done);
-
-	// 	// console.log('started ', this.isGameStarted())
-	// 	// minChunkLength = this.isGameStarted() ?
-	// 	// 	Structs.PacketInfo.length :
-	// 	// 	Structs.Header.length;
-
-	// 	// if (!this.isGameStarted()) {
-
-	// 	// }
-
-	// 	// if (chunk.length < minChunkLength) {
-	// 	// 	throw new Error('Need to stash a header ?');
-	// 	// }
-
-	// 	// this.packetInfo = this.readPacketInfo(chunk);
-	// 	// // send back data
-	// 	// // this.push(this.packetInfo);
-	// 	// this.emit('header', this.packetInfo);
-	// } else {
-	// 	throw new Error('Not a new packet, need to concat chunks');
-	// }
-
-	// done();
+	// Voir https://github.com/csgo-data/demoinfogo-linux/blob/master/src/demofile.cpp #1660
+	// cmd types :
+	//	1 - signon -> HandleDemoPacket - 1
+	//	2 - packet -> HandleDemoPacket - 2
+	// 	3 - synctick -> null DemoInfoGo skips, doesn't read any data
+	//	4 - consolecmd -> readRawData
+	//		 readRawData called with null buffer (?) and 0 size.
+	//		 Actually reads nothing and skips to next header ?
+	//	5 - usercmd -> readUserCmd - 5
+	//	6 - datatables -> readRawData - 6
+	//		 Gets only the size (<i) and reads
+	//	7 - stop -> null - 7
+	//	8 - customdata -> ?? demoinfogo: "a blob of binary data understood by a callback function"
+	//		 Maybe not used in csgo ? should test for it
+	//	9 - stringtables -> readRawData
+	//		 Gets only the size (<i) and reads
+	//	10 - lastcommand -> readRawData - Same as stringtable
+	//
+	// HandleDemoPacket -> cmdInfo + sequenceInfo -> rawData
+	// ReadUserCmd -> size -> rawData
+	//
+	// Should have getters like readPacketLength that map to the structs
+	// and not just a "big header" (can't)
 };
 
 // DemoStream.prototype.concatPacket = function() {
@@ -144,11 +148,9 @@ DemoStream.prototype.extractPacketHeader = function(chunk) {
 	// expected available buffer size (adding slices if any)
 	var availableLength = this.getSlicesLength() + chunk.length;
 	if (availableLength >= expectedLength) {
-		console.log('CONCAT HEADER expected HEADER ', expectedLength, 'available HEADER ', availableLength, this.slices.length)
 		chunk = Buffer.concat(this.slices.concat(chunk));
 		this.slices = []; // reset slices
 	} else {
-		console.log('STASH HEADER expected HEADER ', expectedLength, 'available HEADER ', availableLength, this.slices.length)
 		// not enough data, add the chunk to the slices and return
 		this.slices.push(chunk);
 		return null;
@@ -167,11 +169,9 @@ DemoStream.prototype.extractRawPacketData = function(chunk) {
 	var expectedLength = this.packetHeader.size;
 	var availableLength = this.getSlicesLength() + chunk.length;
 	if (availableLength >= expectedLength) {
-		console.log('CONCAT PACKET expected PACKET ', expectedLength, 'available PACKET ', availableLength, this.slices.length)
 		chunk = Buffer.concat(this.slices.concat(chunk));
 		this.slices = []; // reset slices
 	} else {
-		console.log('STASH PACKET expected PACKET ', expectedLength, 'available PACKET ', availableLength, this.slices.length)
 		// not enough data, add the chunk to the slices and return
 		this.slices.push(chunk);
 		return null;
@@ -231,42 +231,3 @@ DemoStream.prototype.hasSlices = function() {
 DemoStream.prototype.hasHeader = function() {
 	return this.packetHeader !== null;
 };
-
-// DemoStream.prototype = {
-// 	buffer : null,
-// 	pointer : 0,
-// 	tick: 0,
-
-// 	/** @override */
-// 	_transform: function(chunk, encoding, done) {
-// 		console.log('chunk ! Length : ', chunk.length);
-
-// 		// this.stream_.on('readable', function() {
-// 		// 	console.log(Structs)
-// 		// 	var packetInfo = this.readPacketInfo_();
-// 		// 	console.log('packet info ? ', packetInfo)
-// 		// }.bind(this));
-		
-// 		done();
-// 	},
-
-// 	getDemoStream: function() {
-// 		return this.stream_;
-// 	},
-
-// 	// getBuffer : function() {
-// 	// 	return this.buffer;
-// 	// },
-
-// 	// setOffset : function(offset) {
-// 	// 	this.cursor += offset;
-// 	// },
-
-// 	getWat: function() {
-// 		console.log('wat', this)
-// 	},
-
-// 	getCursor: function() {
-// 		return this.cursor;
-// 	}
-// };

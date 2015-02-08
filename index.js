@@ -1,7 +1,7 @@
 var Fs = require('fs')
   , argv = require('yargs').argv
   , Winston = require('winston')
-  , DemoStream = require('./src/core/demostream.js');
+  , PacketParser = require('./src/core/packetparser.js');
 	// , Parser = require('./src/core/parser.js')
 	// , Stats = require('./src/utils/stats.js')
  //  , Util = require('./src/utils/utils.js');
@@ -21,19 +21,17 @@ var logger = new (Winston.Logger)({
 var demoEvents = [];
 
 var entrystream = Fs.createReadStream('/Volumes/MecanicalHD/Dropbox/dev/csgo/demo/demo.dem');
-var demoStream = new DemoStream();
+var packetParser = new PacketParser();
 
 //demoStream.pipe(entrystream)
-entrystream.pipe(demoStream).on('header', function(data) {
+entrystream.pipe(packetParser).on('header', function(data) {
 	console.log('header !', data);
+	process.exit(1)
 	// entrystream.pause()
 });
 
-entrystream.pipe(demoStream).on('data', function(data) {
-	console.log('Data !? !', data);
-
-	// process.exit(0)
-	// entrystream.pause()
+packetParser.on('data', function(data) {
+	console.log('\n\nMETADATA :: \n', data.metadata, '\n DATALENGTH :: ', data.data.length);
 });
 
 // entrystream.pipe(demoStream).on('data', function() {
