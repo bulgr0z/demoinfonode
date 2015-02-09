@@ -1,18 +1,14 @@
 var Util = require('util')
 	, Stream = require('stream')
-	, Varint = require('varint')
 	, Q = require('q')
 	, _ = require('lodash')
 	, Structs = require('../utils/structs.js');
 
-// TODO : Be able to decode multiple packets from a single transform
-
 /**
  * @constructor {PacketParser}
- * @param {string} demopath The path to the demo
  * @param {Object} options Stream.Transform options
  */
-var PacketParser = function(demopath, options) {
+var PacketParser = function(options) {
 	Stream.Transform.call(this, {objectMode: true});
 
 	// 1 or more buffer slices
@@ -29,9 +25,7 @@ Util.inherits(PacketParser, Stream.Transform);
 module.exports = PacketParser;
 
 // map of the packet structs by cmdType
-// FIXME (?) Maybe always has a Structs.PacketLength at the end ?
 PacketParser.PacketStructs = {
-	// Should have 2 _varint32_ after : cmd/size (-> no structs.size)
 	1: [Structs.PacketInfo, Structs.PacketSequence, Structs.PacketLength], // signon (start up message)
 	2: [Structs.PacketInfo, Structs.PacketSequence, Structs.PacketLength], // packet
 	3: [], // syntick, skip packet
@@ -45,12 +39,13 @@ PacketParser.PacketStructs = {
 };
 
 // Custom formatters
+// TODO this could be useful to implement basic stats gathering ?
 PacketParser.Format = {};
-// not enough data to decode
+// Not enough data in the provided chunk
 PacketParser.Format.insufficientData = function(buffer) {
 	return {chunk: buffer };
 };
-
+// HL2DEMO header
 PacketParser.Format.demoHeader = function(header, buffer) {
 	return {
 		type: 'DemoHeader',
@@ -58,7 +53,7 @@ PacketParser.Format.demoHeader = function(header, buffer) {
 		chunk: buffer
 	};
 };
-
+// dem packet
 PacketParser.Format.packet = function(packetMetadata, data, buffer) {
 	return  {
 		type: 'Packet',
@@ -67,7 +62,7 @@ PacketParser.Format.packet = function(packetMetadata, data, buffer) {
 		chunk: buffer
 	};
 };
-
+// empty packet (eg. synctick) -> empty data, nothing read except header
 PacketParser.Format.emptyPacket = function(packetMetadata, buffer) {
 	return {
 		type: 'Packet',
@@ -80,29 +75,37 @@ PacketParser.Format.emptyPacket = function(packetMetadata, buffer) {
 // Transform implementation
 
 PacketParser.prototype._transform = function(chunk, encoding, done) {
-	// When HL2DEMO header is encountered, should emit a 'header' event
-	// and maybe stash the rest to return early ?
-	var parsedPacket = this.parse(chunk);
+	// At first tries to read a HL2DEMO header from the stream
+	// If found, will emit it and stash leftovers from the chunk.
+	//
+	// FIXME should implement basic overflow protection
+	//		(eg. throw if cant parse even if > 1072b)
+	if (!this.isStarted) {
+		var parsedPacket = this.parse(chunk);
+		if (parsedPacket.type === 'DemoHeader') {
+			this.emit('header', parsedPacket.demoHeader);
+			this.isStarted = true; // now will start parsing packets
+		}
 
-	if (parsedPacket.type === 'DemoHeader') {
-		this.emit('header', parsedPacket.demoHeader);
-		this.isStarted = true; // now will start parsing packets
+		this.stash(parsedPacket.chunk);
+		done();
 	}
-
-	if (parsedPacket.type === 'Packet') {
-		// push the packet down the stream
-		this.push({
-			metadata: parsedPacket.metadata,
-			data: parsedPacket.data
+	// When HL2DEMO has been found, iterate over the chunk (and previous stash)
+	// to parse any packet present.
+	else {
+		chunk = this.getStashBuffer(chunk); // apply stash first
+		this.parseAllChunkPackets(chunk, function(leftovers) {
+			this.stash(leftovers.chunk);
+			done();
 		});
 	}
 
-	this.stash(parsedPacket.chunk);
-	done();
 };
 
 // Api
 
+// Parse a chunk, returns a DemoHeader or Packet
+// FIXME should be deprecated ?
 PacketParser.prototype.parse = function(chunk) {
 	// append stashed chunks first
 	var dataBuf = this.getStashBuffer(chunk);
@@ -114,6 +117,7 @@ PacketParser.prototype.parse = function(chunk) {
 	return this.parsePacket(dataBuf);
 };
 
+// Add a buffer to the stash
 PacketParser.prototype.stash = function(buffer) {
 	if (buffer.length) this.slices.push(buffer);
 };
@@ -140,6 +144,28 @@ PacketParser.prototype.parseDemHeader = function(buffer) {
 		buffer.slice(headerLength));
 };
 
+// Parses & emit as many packets as possible from the provided buffer. Recursive
+// in process.nextTick, will stop when an InsuficientData returns and call
+// `parsed` to give back the control to `transform_`.
+PacketParser.prototype.parseAllChunkPackets = function(buffer, parsed) {
+	var packet = this.parsePacket(buffer);
+
+	if (packet.type === 'Packet') {
+		this.push({
+			metadata: packet.metadata,
+			data: packet.data
+		});
+		// iterate without breaking the loop
+		process.nextTick(function() {
+			this.parseAllChunkPackets(packet.chunk, parsed);
+		}.bind(this));
+	} else {
+		parsed.apply(this, [packet]);
+	}
+};
+
+// Parse a packet from the provided buffer. The buffer is expected to have
+// already been appended to the stash.
 PacketParser.prototype.parsePacket = function(buffer) {
 	// keep a copy of the original `buffer` : it may be needed for an early return
 	var originalChunk = buffer;
@@ -156,11 +182,10 @@ PacketParser.prototype.parsePacket = function(buffer) {
 	PacketParser.PacketStructs[packetMetadata.cmd].forEach(function(struct) {
 		additionalMetaLength += struct.length;
 	});
-	// If no additional meta is provided, there is no raw data to extract.
+	// If no additional meta is provided, there is no data to extract (no 'size' struct).
 	// We can do an early return with an empty `data` prop
 	if (additionalMetaLength === 0)
 		return PacketParser.Format.emptyPacket(packetMetadata, buffer);
-		// return {chunk: originalChunk, data: []};
 	// not enough buffer to read additional meta
 	if (buffer.length < additionalMetaLength)
 		return PacketParser.Format.insufficientData(originalChunk);
@@ -170,39 +195,13 @@ PacketParser.prototype.parsePacket = function(buffer) {
 		_.assign(packetMetadata, struct.decode(buffer));
 		buffer = buffer.slice(struct.length);
 	});
-
 	if (buffer.length < packetMetadata.packetSize)
 		return PacketParser.Format.insufficientData(originalChunk);
 
-	// Should be in a decoder, not here.
-	//
-	// Read the two varints describing a
-	// var cmdSlice = this.getVarintAndSlice(buffer);
-	// if (!cmdSlice) return {chunk: buffer};
-	// buffer = cmdSlice.chunk;
-
-	// var pLengthSlice =
-
+	// Parsed a full packet, return it for emit
 	return PacketParser.Format.packet(
 		packetMetadata,
 		buffer.slice(0, packetMetadata.packetSize), // data slice
 		buffer.slice(packetMetadata.packetSize) // remaining buffer
 	);
-
 };
-
-// Should be in Decoder
-//
-// reads a varint from `buffer` and returns an object
-// @return {varint: <the varint>, chunk: <remaining data>} OR null
-// PacketParser.prototype.getVarintAndSlice = function(buffer) {
-// 	// Varint.decode will return `undefined` if not enough data is provided
-// 	var varint = Varint.decode(packetBuffer.slice(offset))
-// 	var varintSize = Varint.decode.bytes; // the length of the encoded varint
-// 	if (varint === undefined) return null;
-
-// 	return {
-// 		varint: varint,
-// 		chunk: buffer.slice(varintSize)
-// 	};
-// };
