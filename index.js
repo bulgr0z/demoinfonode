@@ -1,7 +1,8 @@
 var Fs = require('fs')
   , argv = require('yargs').argv
   , Winston = require('winston')
-  , PacketParser = require('./src/core/packetparser.js');
+  , PacketParser = require('./src/parser/packetparser.js')
+  , PacketDecoder = require('./src/decoder/decoder.js');
 
 var demofile = argv._[0];
 var bufferPointer;
@@ -16,10 +17,10 @@ var logger = new (Winston.Logger)({
 
 var entrystream = Fs.createReadStream('/Volumes/MecanicalHD/Dropbox/dev/csgo/demo/demo.dem');
 var packetParser = new PacketParser();
+var packetDecoder = new PacketDecoder();
 
-entrystream.pipe(packetParser).on('header', function(data) {
-	//console.log('header !', data);
-});
+
+entrystream.pipe(packetParser).pipe(packetDecoder);
 
 var start = new Date().valueOf();
 var end;

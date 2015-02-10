@@ -38,8 +38,9 @@ PacketParser.PacketStructs = {
 	10: [Structs.PacketLength], // stringtables
 };
 
-// Custom formatters
+// Custom formatters, provide schema for the extractors
 // TODO this could be useful to implement basic stats gathering ?
+// TODO2 each formatter could assert/throw the provided data before return
 PacketParser.Format = {};
 // Not enough data in the provided chunk
 PacketParser.Format.insufficientData = function(buffer) {
@@ -99,7 +100,6 @@ PacketParser.prototype._transform = function(chunk, encoding, done) {
 			done();
 		});
 	}
-
 };
 
 // Api
@@ -145,7 +145,7 @@ PacketParser.prototype.parseDemHeader = function(buffer) {
 };
 
 // Parses & emit as many packets as possible from the provided buffer. Recursive
-// in process.nextTick, will stop when an InsuficientData returns and call
+// process.nextTick; will stop when 'insuficientData' returns, then call
 // `parsed` to give back the control to `transform_`.
 PacketParser.prototype.parseAllChunkPackets = function(buffer, parsed) {
 	var packet = this.parsePacket(buffer);
@@ -182,8 +182,8 @@ PacketParser.prototype.parsePacket = function(buffer) {
 	PacketParser.PacketStructs[packetMetadata.cmd].forEach(function(struct) {
 		additionalMetaLength += struct.length;
 	});
-	// If no additional meta is provided, there is no data to extract (no 'size' struct).
-	// We can do an early return with an empty `data` prop
+	// If no additional meta is provided, there is no data to extract
+	// (no 'packetSize' struct); we can do an early return with an empty `data`
 	if (additionalMetaLength === 0)
 		return PacketParser.Format.emptyPacket(packetMetadata, buffer);
 	// not enough buffer to read additional meta
