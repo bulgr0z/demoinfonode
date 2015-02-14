@@ -2,5 +2,6 @@
 	"quotmark" : "single",
 	"maxlen" : 90,
 	"laxcomma" : true,
-	"node" : true
+	"node" : true,
+	"esnext": true
 }

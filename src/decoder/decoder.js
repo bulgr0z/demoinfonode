@@ -6,7 +6,7 @@ var Util = require('util')
 	, Structs = require('../utils/structs.js');
 // Messages Types
 var Decoders = {};
-Decoders.DemoMessage = require('./decoder.demomessage.js');
+Decoders.DemoMessages = require('./decoder.demomessages.js');
 
 
 /**
@@ -44,12 +44,12 @@ PacketDecoder.Format.messageMetadata = function(cmd, length, buffer) {
 	};
 };
 
-PacketDecoder.Format.demoMessage = function(demoMessage, buffer) {
-	return {
-		demoMessage: demoMessage,
-		chunk: buffer
-	};
-};
+// PacketDecoder.Format.demoMessage = function(demoMessage, buffer) {
+// 	return {
+// 		demoMessage: demoMessage,
+// 		chunk: buffer
+// 	};
+// };
 
 // TRANSFORM
 
@@ -58,39 +58,34 @@ PacketDecoder.prototype._transform = function(packet, encoding, done) {
 
 	var chunk = packet.data;
 	// a bit ugly there ?
-	var formattedMeta = this.getMessageMetadata(chunk);
-	chunk = formattedMeta.chunk;
-	var messages = this.decodeDemoPacket({
-		cmd: formattedMeta.cmd,
-		length: formattedMeta.length
-	}, chunk);
-
-	console.log(messages)
-	console.log(formattedMeta, formattedMeta.chunk.length);
+	// var formattedMeta = this.getMessageMetadata(chunk);
+	// chunk = formattedMeta.chunk;
+	// var messages = this.decodeDemoPacket({
+	// 	cmd: formattedMeta.cmd,
+	// 	length: formattedMeta.length
+	// }, chunk);
+	console.log('before');
+	var messages = this.decodeDemoMessages(chunk);
+	console.log('after ');
+	// console.log(messages)
+	// console.log(formattedMeta, formattedMeta.chunk.length);
 	process.exit(0);
 };
 
 // API
 
-PacketDecoder.prototype.getMessageMetadata = function(chunk) {
-	// varint32 encoded message cmd
-	var messageCmd = Varint.decode(chunk);
-	// offset buffer with the size (B) of the decoded varint
-	chunk = chunk.slice(Varint.decode.bytes);
-	// message length
-	var messageLength = Varint.decode(chunk);
-	chunk = chunk.slice(Varint.decode.bytes); // offset
-	return PacketDecoder.Format.messageMetadata(
-		messageCmd, messageLength, chunk);
-};
 
-PacketDecoder.prototype.decodeDemoPacket = function(meta, chunk) {
-	// Should decode the multiples `DemoMessage` forming the Packet
-	//
-	console.log('Decode Demo Packet !');
-	var messageData = chunk.slice(0, meta.length);
-	return PacketDecoder.Format.demoMessage(
-		new Decoders.DemoMessage(meta, messageData),
-		chunk.slice(meta.length)
-	);
+// Decode a DemoPacket composed of 1 or more messages
+PacketDecoder.prototype.decodeDemoMessages = function(chunk) {
+	// Should just be `DemoMessages.getMessages()` ?
+	// There is no reason to iterate from there, and it would be cleaner
+	// to just be able to use DemoMessages as a collection afterwards
+	var DemoMessages = new Decoders.DemoMessages(chunk)
+	var messages = [];
+	for (var message of DemoMessages.getNextMessage()) {
+		console.log('- received a message')
+		messages.push(message);
+	}
+
+	return messages;
 };
