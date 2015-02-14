@@ -80,12 +80,6 @@ PacketDecoder.prototype.decodeDemoMessages = function(chunk) {
 	// Should just be `DemoMessages.getMessages()` ?
 	// There is no reason to iterate from there, and it would be cleaner
 	// to just be able to use DemoMessages as a collection afterwards
-	var DemoMessages = new Decoders.DemoMessages(chunk)
-	var messages = [];
-	for (var message of DemoMessages.getNextMessage()) {
-		console.log('- received a message')
-		messages.push(message);
-	}
-
-	return messages;
+	
+	return new Decoders.DemoMessages(chunk);
 };

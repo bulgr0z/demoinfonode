@@ -22,31 +22,39 @@ var UserMessage = UserMessageBuilder.build();
 var DemoMessages = function(data) {
 	this.messages = [];
 	this.data = data;
-	console.log('construct DemoMessages')
+
+	this.decodeMessages_();
 };
 
 module.exports = DemoMessages;
 
+DemoMessages.prototype.getMessages = function() {
+	for (var message of this.getNextMessage())
+		this.messages.push(message);
+};
+
 // iterator func
-DemoMessages.prototype.getNextMessage = function* () {
-	console.log('get next message ', this.data.length)
+DemoMessages.prototype.getNextMessage_ = function* () {
 	while (this.data.length > 0) {
-		console.log('Iterator data length', this.data.length)
-		var meta = this.getMessageMetadata();
+		var meta = this.getMessageMetadata_();
 		// extract the message's raw data
 		var encodedMessage = this.data.slice(0, meta.length);
 		this.data = this.data.slice(meta.length); // offset this.data
-		// get message model
+		// get the message model
 		var message = new DemoMessage(
-			meta, encodedMessage
-		);
-		console.log('ITERATOR BUILT A MESSAGE', message);
-		yield message;
+			meta, encodedMessage);
+		yield message; // return message
 	}
 };
 
+// iterates messages over the packet data
+DemoMessages.prototype.decodeMessages_ = function() {
+	for (var message of this.getNextMessage_())
+		this.messages.push(message);
+};
+
 // Decode the message's meta from the chunk and offset
-DemoMessages.prototype.getMessageMetadata = function() {
+DemoMessages.prototype.getMessageMetadata_ = function() {
 	// varint32 encoded message cmd
 	var messageCmd = Varint.decode(this.data);
 	// offset buffer with the size (B) of the decoded varint
@@ -58,8 +66,6 @@ DemoMessages.prototype.getMessageMetadata = function() {
 		cmd: messageCmd,
 		length: messageLength
 	};
-	// return PacketDecoder.Format.messageMetadata(
-	// 	messageCmd, messageLength, chunk);
 };
 
 
@@ -79,7 +85,6 @@ var DemoMessage = function(packetMeta, data) {
 	console.log('message type ? ', this.messageType);
 	console.log('message name ? ', this.messageName);
 	console.log('data length ? ', data.length);
-
 
 	this.message = this.decodeMessage(data);
 };
