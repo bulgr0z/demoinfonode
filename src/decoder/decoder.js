@@ -4,6 +4,10 @@ var Util = require('util')
 	, Q = require('q')
 	, _ = require('lodash')
 	, Structs = require('../utils/structs.js');
+// Messages Types
+var Decoders = {};
+Decoders.DemoMessage = require('./decoder.demomessage.js');
+
 
 /**
  * @constructor {PacketDecoder}
@@ -40,15 +44,29 @@ PacketDecoder.Format.messageMetadata = function(cmd, length, buffer) {
 	};
 };
 
+PacketDecoder.Format.demoMessage = function(demoMessage, buffer) {
+	return {
+		demoMessage: demoMessage,
+		chunk: buffer
+	};
+};
+
 // TRANSFORM
 
 PacketDecoder.prototype._transform = function(packet, encoding, done) {
 	console.log('packet decoder received packet ', packet);
 
 	var chunk = packet.data;
-	var meta = this.getMessageMetadata(chunk);
-	var message = this.decodeDemoPacket(meta, chunk);
-	console.log(meta, meta.chunk.length);
+	// a bit ugly there ?
+	var formattedMeta = this.getMessageMetadata(chunk);
+	chunk = formattedMeta.chunk;
+	var messages = this.decodeDemoPacket({
+		cmd: formattedMeta.cmd,
+		length: formattedMeta.length
+	}, chunk);
+
+	console.log(messages)
+	console.log(formattedMeta, formattedMeta.chunk.length);
 	process.exit(0);
 };
 
@@ -67,5 +85,12 @@ PacketDecoder.prototype.getMessageMetadata = function(chunk) {
 };
 
 PacketDecoder.prototype.decodeDemoPacket = function(meta, chunk) {
-	
+	// Should decode the multiples `DemoMessage` forming the Packet
+	//
+	console.log('Decode Demo Packet !');
+	var messageData = chunk.slice(0, meta.length);
+	return PacketDecoder.Format.demoMessage(
+		new Decoders.DemoMessage(meta, messageData),
+		chunk.slice(meta.length)
+	);
 };
