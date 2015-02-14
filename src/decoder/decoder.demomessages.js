@@ -1,10 +1,7 @@
 var Util = require('util')
-	, Stream = require('stream')
 	, Varint = require('varint')
 	, ProtoBuff = require('protobufjs')
-	, Q = require('q')
-	, _ = require('lodash')
-	, Structs = require('../utils/structs.js');
+	, _ = require('lodash');
 // Proto
 var NetMessageProto = require('../../protobuf/netmessages.proto.json');
 var UserMessageProto = require('../../protobuf/usermessages.proto.json');
@@ -18,9 +15,12 @@ UserMessageBuilder.import(UserMessageProto);
 var UserMessage = UserMessageBuilder.build();
 
 
-// The `DemoMessages` iterator to decode 1 or more `DemoMessage`
-var DemoMessages = function(data) {
+// A DemoMessage collection.
+// Decodes all messages from the given data chunk on construct.
+// Note : the decoding is done with an ES6 iterator.
+var DemoMessages = function(metadata, data) {
 	this.messages = [];
+	this.metadata = metadata;
 	this.data = data;
 
 	this.decodeMessages_();
@@ -31,6 +31,13 @@ module.exports = DemoMessages;
 DemoMessages.prototype.getMessages = function() {
 	for (var message of this.getNextMessage())
 		this.messages.push(message);
+};
+
+DemoMessages.prototype.toJSON = function() {
+	return {
+		metadata: this.metadata,
+		messages: this.messages
+	};
 };
 
 // iterator func
@@ -75,22 +82,10 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
  * @param {Buffer} data The message's raw data
  */
 var DemoMessage = function(packetMeta, data) {
-	// console.log('construct proto packet');
-	// console.log(NetMessage);
-
 	this.setMessageType(packetMeta.cmd);
-
 	this.setMessageName(packetMeta.cmd);
-
-	console.log('message type ? ', this.messageType);
-	console.log('message name ? ', this.messageName);
-	console.log('data length ? ', data.length);
-
 	this.message = this.decodeMessage(data);
 };
-
-// TODO : inherit from generic `Packet` which would provide getters
-// Util.inherits(PacketDecoder, Stream.Transform);
 
 DemoMessage.prototype.setMessageName = function(cmd) {
 	// messages in the enum are referenced as svc_ or net_
@@ -120,13 +115,10 @@ DemoMessage.prototype.setMessageType = function(cmd) {
 
 
 DemoMessage.prototype.decodeMessage = function(data) {
-
+	// The given command was not found in the proto enums
+	// TODO should keep some stats on these
+	if (!this.messageName)
+		return null;
+	// decode the message
 	return NetMessage[this.messageName].decode(data);
-
-	// if (this.messageType === 'SVC')
-	// 	return UserMessage[this.messageName].decode(data);
-	// NET_Messages
-	// SVC_Messages
-	// var messageName = NetMessage[this.messageType][_.invert(NetMessage.SVC_Messages)]
-	// return NetMessage[]
 };

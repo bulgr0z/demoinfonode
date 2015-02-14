@@ -24,10 +24,7 @@ entrystream.pipe(packetParser).pipe(packetDecoder);
 
 var start = new Date().valueOf();
 var end;
-packetParser.on('data', function(packet) {
-	// console.log('\n\nMETADATA :: \n', packet.metadata, '\n DATALENGTH :: ', packet.data.length);
-  if (packet.metadata.cmd === 7) {
-    end = new Date().valueOf();
-    console.log('TIME : ', (end - start) / 1000)
-  }
+
+packetDecoder.on('data', function(packet) {
+  console.log(JSON.stringify(packet, null, 2));
 });

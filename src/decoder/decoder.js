@@ -1,15 +1,14 @@
 var Util = require('util')
-	, Stream = require('stream')
-	, Varint = require('varint')
-	, Q = require('q')
-	, _ = require('lodash')
-	, Structs = require('../utils/structs.js');
+	, Stream = require('stream');
 // Messages Types
 var Decoders = {};
 Decoders.DemoMessages = require('./decoder.demomessages.js');
 
 
 /**
+ * Gets the appropriate decoder for the given packet.
+ * When the decoder has built its message collection, push them down the stream.
+ *
  * @constructor {PacketDecoder}
  * @param {Object} options Stream.Transform options
  */
@@ -20,9 +19,10 @@ var PacketDecoder = function(options) {
 Util.inherits(PacketDecoder, Stream.Transform);
 module.exports = PacketDecoder;
 
-PacketDecoder.MessageCallbacks = {
-	1: 'decodeDemoPacket',
-	2: 'decodeDemoPacket',
+// Map the Decoders by cmd
+PacketDecoder.Decoders = {
+	1: Decoders.DemoMessages, // signon
+ 	2: Decoders.DemoMessages, // packet
 	3: null, // UNSUSED Does not even come in the decoder, to remove ?
 	4: null, // UNSUSED
 	5: null, // TODO userCmd
@@ -44,42 +44,17 @@ PacketDecoder.Format.messageMetadata = function(cmd, length, buffer) {
 	};
 };
 
-// PacketDecoder.Format.demoMessage = function(demoMessage, buffer) {
-// 	return {
-// 		demoMessage: demoMessage,
-// 		chunk: buffer
-// 	};
-// };
-
 // TRANSFORM
 
 PacketDecoder.prototype._transform = function(packet, encoding, done) {
-	console.log('packet decoder received packet ', packet);
+	var packetData = packet.data;
+	var packetMeta = packet.metadata;
+	var decoder = PacketDecoder.Decoders[packetMeta.cmd];
+	// empty packet or no decoder found, skip
+	if (!decoder) return done();
+	// Decodes the packet and return a usable messages collection
+	var messages = new decoder(packetMeta, packetData);
 
-	var chunk = packet.data;
-	// a bit ugly there ?
-	// var formattedMeta = this.getMessageMetadata(chunk);
-	// chunk = formattedMeta.chunk;
-	// var messages = this.decodeDemoPacket({
-	// 	cmd: formattedMeta.cmd,
-	// 	length: formattedMeta.length
-	// }, chunk);
-	console.log('before');
-	var messages = this.decodeDemoMessages(chunk);
-	console.log('after ');
-	// console.log(messages)
-	// console.log(formattedMeta, formattedMeta.chunk.length);
-	process.exit(0);
-};
-
-// API
-
-
-// Decode a DemoPacket composed of 1 or more messages
-PacketDecoder.prototype.decodeDemoMessages = function(chunk) {
-	// Should just be `DemoMessages.getMessages()` ?
-	// There is no reason to iterate from there, and it would be cleaner
-	// to just be able to use DemoMessages as a collection afterwards
-	
-	return new Decoders.DemoMessages(chunk);
+	this.push(messages.toJSON());
+	return done();
 };
