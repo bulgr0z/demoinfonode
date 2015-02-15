@@ -14,6 +14,8 @@ var UserMessageBuilder = new ProtoBuff.Builder();
 UserMessageBuilder.import(UserMessageProto);
 var UserMessage = UserMessageBuilder.build();
 
+// TODO the collection should be able to whitelist/blacklist packets
+// (as in, not even decoded, purely skiped)
 
 // A DemoMessage collection.
 // Decodes all messages from the given data chunk on construct.
@@ -76,34 +78,66 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
 };
 
 
+// DemoMessage model
+
+// DT_CSPlayer look for this
+// deadflag = 1
+
 /**
  * @constructor {DemoMessage} a single DemoMessage
  * @param {Object} packetMeta The message's metadata
  * @param {Buffer} data The message's raw data
  */
 var DemoMessage = function(packetMeta, data) {
+	// The base message is always a NetMessage, but there can be
+	// anything nested in this message (UserMessage, stringtable, etc..)
 	this.setMessageType(packetMeta.cmd);
-	this.setMessageName(packetMeta.cmd);
-	this.message = this.decodeMessage(data);
+	var netMessageName = this.getMessageName('net', packetMeta.cmd);
+	var netMessage = this.decodeNetMessage(netMessageName, data);
+
+	// we have a nested UserMessage, decode it
+	if (netMessageName === 'CSVCMsg_UserMessage') {
+		var userMessageName = this.getMessageName('user', netMessage.msg_type);
+		userMessage = this.decodeUserMessage(userMessageName, netMessage.msg_data);
+		// set the message
+		this.message = userMessage;
+		this.messageName = userMessageName;
+	} else {
+		// no user message, the message is the netMessage
+		this.message = netMessage;
+		this.messageName = netMessageName;
+	}
 };
 
-DemoMessage.prototype.setMessageName = function(cmd) {
+// Get a message name from a proto enum.
+// @param {string} type The message type (eg. 'user' or 'net')
+// @param {number} cmd The cmd int
+DemoMessage.prototype.getMessageName = function(type, cmd) {
 	// messages in the enum are referenced as svc_ or net_
 	// but named as CSVCMsg_ or CNETMsg_.
 	var buildMsgName = function(prefix, name) {
 		var split = name.split('_');
-		return prefix + '_' + split[1];
+		return prefix + '_' + split.pop();
 	};
 
-	// invert enums to look up the names by cmd
-	// lodash is awesome
-	var invNet = _.invert(NetMessage.NET_Messages);
-	var invUser = _.invert(UserMessage.SVC_Messages);
+	var messageName;
+	if (type === 'net') {
+		// invert enums to look up the names by cmd
+		// lodash is awesome
+		var invNet = _.invert(NetMessage.NET_Messages);
+		var invSvc = _.invert(NetMessage.SVC_Messages);
 
-	if (cmd in invNet)
-		this.messageName = buildMsgName('CNETMsg', invNet[cmd]);
-	if (cmd in invUser)
-		this.messageName = buildMsgName('CSVCMsg', invUser[cmd]);
+		if (cmd in invNet)
+			messageName = buildMsgName('CNETMsg', invNet[cmd]);
+		if (cmd in invSvc)
+			messageName = buildMsgName('CSVCMsg', invSvc[cmd]);
+	}
+	if (type === 'user') {
+		var invUser = _.invert(UserMessage.ECstrike15UserMessages);
+		if (cmd in invUser)
+			messageName = buildMsgName('CCSUsrMsg', invUser[cmd]);
+	}
+	return messageName;
 };
 
 DemoMessage.prototype.setMessageType = function(cmd) {
@@ -114,11 +148,18 @@ DemoMessage.prototype.setMessageType = function(cmd) {
 };
 
 
-DemoMessage.prototype.decodeMessage = function(data) {
+DemoMessage.prototype.decodeNetMessage = function(messageName, data) {
 	// The given command was not found in the proto enums
 	// TODO should keep some stats on these
-	if (!this.messageName)
+	if (!messageName)
 		return null;
 	// decode the message
-	return NetMessage[this.messageName].decode(data);
+	return NetMessage[messageName].decode(data);
+};
+
+DemoMessage.prototype.decodeUserMessage = function(messageName, data) {
+	if (!messageName)
+		return null;
+	// decode the message
+	return UserMessage[messageName].decode(data);
 };

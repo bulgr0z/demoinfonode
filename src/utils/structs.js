@@ -1,12 +1,5 @@
-var Binary = require('binary')
-	, Bufferpack = require('bufferpack')
+var Bufferpack = require('bufferpack')
 	, Util = require('./utils.js');
-
-// UPDATE 2015 -
-// PacketInfo contains the FULL HEADER of a packet, up to the start of
-// the unerlying Message. Could be then split up by the Parser into
-// a `packetMeta` and `messageMeta` if it is really necessary
-
 
 /**
  * Collection of helpers to decode the binary structs from a demofile.
@@ -23,7 +16,7 @@ var Structs = {
 
 		length : 1072,
 		// "<" defines little-endianness
-		format : "<8s(demoType)i(demoProtocol)i(netProtocol)260s(hostName)260s(clientName)260s(mapName)260s(gameDir)f(time)i(ticks)i(frames)i(signOn)"
+		format : '<8s(demoType)i(demoProtocol)i(netProtocol)260s(hostName)260s(clientName)260s(mapName)260s(gameDir)f(time)i(ticks)i(frames)i(signOn)'
 
 	},
 
@@ -33,7 +26,7 @@ var Structs = {
 	PacketMetadata : {
 
 		length : 6,
-		format : "<B(cmd)i(tick)B(playerSlot)"
+		format : '<B(cmd)i(tick)B(playerSlot)'
 
 	},
 
@@ -45,7 +38,7 @@ var Structs = {
 		// cmdinfo should be the first int32 found
 		// 152B = 72x2 (for splitscreen)
 		length : 152,
-		format : "<i(command)"
+		format : '<i(command)'
 
 	},
 
@@ -55,7 +48,7 @@ var Structs = {
 	PacketSequence : {
 
 		length : 8,
-		format : "<i(in)i(out)"
+		format : '<i(in)i(out)'
 
 	},
 
@@ -65,7 +58,7 @@ var Structs = {
 	PacketLength : {
 
 		length : 4,
-		format : "<i(packetSize)"
+		format : '<i(packetSize)'
 
 	}
 
@@ -74,10 +67,8 @@ var Structs = {
 // Extends the structs with a `decode` method
 for (var struct in Structs) {
 	Structs[struct]['decode'] = function(buffer) {
-
 		var decoded = Bufferpack.unpack(this.format, buffer);
-
-		return Util.trimObject(decoded);
+		return Util.trimObject(decoded); // trim strings whitespace
 	};
 }
 
