@@ -3,6 +3,7 @@ var Util = require('util')
 // Messages Types
 var Decoders = {};
 Decoders.DemoMessages = require('./decoder.demomessages.js');
+Decoders.DataTableMessages = require('./decoder.datatablemessages.js');
 
 
 /**
@@ -26,7 +27,7 @@ PacketDecoder.Decoders = {
 	3: null, // UNSUSED Does not even come in the decoder, to remove ?
 	4: null, // UNSUSED
 	5: null, // TODO userCmd
-	6: null, // TODO datatables
+	6: Decoders.DataTableMessages,
 	7: null, // UNSUSED dem stop
 	8: null, // UNSUSED "customdata"
 	9: null, // TODO stringtables

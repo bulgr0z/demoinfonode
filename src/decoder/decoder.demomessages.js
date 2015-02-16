@@ -6,13 +6,8 @@ var Util = require('util')
 var NetMessageProto = require('../../protobuf/netmessages.proto.json');
 var UserMessageProto = require('../../protobuf/usermessages.proto.json');
 
-var NetMessageBuilder = new ProtoBuff.Builder(); // <3 protobufjs
-NetMessageBuilder.import(NetMessageProto); // import proto in the builder
-var NetMessage = NetMessageBuilder.build(); // return the messages namespace
-
-var UserMessageBuilder = new ProtoBuff.Builder();
-UserMessageBuilder.import(UserMessageProto);
-var UserMessage = UserMessageBuilder.build();
+var NetMessage = require('./decoder.proto.js').NetMessage;
+var UserMessage = require('./decoder.proto.js').UserMessage;
 
 // TODO the collection should be able to whitelist/blacklist packets
 // (as in, not even decoded, purely skiped)
@@ -29,11 +24,6 @@ var DemoMessages = function(metadata, data) {
 };
 
 module.exports = DemoMessages;
-
-DemoMessages.prototype.getMessages = function() {
-	for (var message of this.getNextMessage())
-		this.messages.push(message);
-};
 
 DemoMessages.prototype.toJSON = function() {
 	return {
@@ -81,6 +71,7 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
 // DemoMessage model
 
 // DT_CSPlayer look for this
+// --> Next priority should be datatables decoding
 // deadflag = 1
 
 /**
