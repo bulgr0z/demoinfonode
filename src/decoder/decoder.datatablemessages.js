@@ -9,31 +9,27 @@
 // wont be able to get a size to slice the buffer for a message
 // demoinfogo seems like its looping over the message attributes until
 // it encounters is_end ?
-//
-// Cant decode a non delimited buffer, could read by hand ?
-// see protobufjs#3090 for example
 
 var Util = require('util')
 	, Varint = require('varint')
 	, ProtoBuff = require('protobufjs')
+	, ByteBuffer = require('bytebuffer')
 	, _ = require('lodash');
 // Proto
 var NetMessage = require('./decoder.proto.js').NetMessage;
+var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
 
-// var NetMessageBuilder = new ProtoBuff.Builder();
-// NetMessageBuilder.import(NetMessageProto);
-// var NetMessage = NetMessageBuilder.build();
-
-// console.log(NetMessage)
 // A DataTableMessage collection.
 var DataTableMessages = function(meta, data) {
-	// this.messages = [];
-	console.log('Construct DataTableMessages');
-	this.data = data;
+	// wrap data in a ByteBuffer; offers pretty cool stuff like
+	// varint32 decoding with a nice offset set.
+	// TODO : Decoders should handle their data as a ByteBuffer instead
+	// of node's native buffers.
+	this.data = ByteBuffer.wrap(data);
 	this.metadata = data;
 	// unique DataTableMessages
 	this.isEnd = false;
-
+	this.messages = [];
 	this.decodeMessages_();
 };
 
@@ -50,16 +46,17 @@ DataTableMessages.prototype.toJSON = function() {
 DataTableMessages.prototype.getNextMessage_ = function* () {
 	// while the last is_end has been decoded
 	while (this.isEnd === false) {
-		// message should have access to all available data ?
-		// we cant predict its size. Maybe better to have a getLeftovers()
-		// method on the model to call which would return the leftover data
-		// from decoding. Or a getByteSize() that would return the bytes needed to decode.
-		console.log('DECODE DATATABLE MESSAGE ');
-		var message = new DataTableMessage(this.data);
-		console.log('MESSAGE', message)
-		process.exit(0);
-		yield message; // return message
+		// NOTE : decoding a message from a ByteBuffer with Protobufjs
+		// will nicely set the buffer's offset for us. -> We don't need to keep track
+		// of `data` cursor.
+		var model = new DataTableMessage(this.data);
+		// last message has `is_end:true`
+		if (model.message.$get('is_end'))
+			this.isEnd = true;
+
+		yield model; // return message
 	}
+	process.exit(0)
 };
 
 // iterates messages over the packet data
@@ -67,6 +64,7 @@ DataTableMessages.prototype.decodeMessages_ = function() {
 	for (var message of this.getNextMessage_())
 		this.messages.push(message);
 };
+
 
 // DataTableMessage model
 
@@ -77,10 +75,17 @@ DataTableMessages.prototype.decodeMessages_ = function() {
  */
 var DataTableMessage = function(data) {
 	this.messageName = 'CSVCMsg_SendTable';
+	this.type = null;
+	this.byteSize = 0;
 	this.message = this.decodeDataTable(data);
 };
 
 DataTableMessage.prototype.decodeDataTable = function(data) {
-	console.log(NetMessage[this.messageName]);
-	return NetMessage[this.messageName].decode(data);
+	// read DataTable type & size
+	this.type = data.readVarint32();
+	this.byteSize = data.readVarint32();
+
+	var Message = NetMessageBuilder.lookup('NetMessages.CSVCMsg_SendTable');
+	var group = Message.isGroup;
+	return Message.decode(data, this.byteSize, 1);
 };
