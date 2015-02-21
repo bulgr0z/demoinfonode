@@ -4,8 +4,14 @@
 A javascript parser for cs:go .dem files, based on on NodeJS streams API.
 
 ### What does it decode ?
-At the moment the only available decoders are the proto decoders.
-This mainly means that you wont get (yet) the player info (ie. camera/position vectors).
+* Most Net messages
+* Most User messages
+* DataTables
+
+** Todo **
+
+* Stringtables
+* Game events
 
 ### Usage
 
