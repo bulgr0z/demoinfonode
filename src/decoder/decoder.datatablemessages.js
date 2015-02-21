@@ -56,7 +56,6 @@ DataTableMessages.prototype.getNextMessage_ = function* () {
 
 		yield model; // return message
 	}
-	process.exit(0)
 };
 
 // iterates messages over the packet data

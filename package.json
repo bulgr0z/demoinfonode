@@ -1,25 +1,22 @@
 {
   "name": "demoinfonode",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified (yet)\" && exit 1"
   },
-  "author": "",
-  "license": "BSD-2-Clause",
+  "author": "Paul Sore <paul.sore@gmail.com>",
+  "license": "MIT",
   "dependencies": {
-    "binary": "~0.3.0",
     "bufferpack": "0.0.6",
     "bytebuffer": "^3.5.4",
     "gulp": "~3.8.10",
     "gulp-jsdoc": "~0.1.4",
     "lodash": "~2.4.1",
     "protobufjs": "~3.7.0",
-    "protocol-buffers": "^2.5.1",
     "q": "~1.0.1",
     "varint": "~3.0.1",
-    "winston": "~0.8.3",
-    "yargs": "~1.3.2"
+    "winston": "~0.8.3"
   }
 }
