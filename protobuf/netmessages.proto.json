@@ -1,5 +1,5 @@
 {
-    "package": null,
+    "package": "NetMessages",
     "messages": [
         {
             "name": "CMsgVector",
