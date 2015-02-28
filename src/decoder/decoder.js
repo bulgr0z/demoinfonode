@@ -1,4 +1,5 @@
 var Util = require('util')
+	, ByteBuffer = require('bytebuffer')
 	, Stream = require('stream');
 // Messages Types
 var Decoders = {};
@@ -48,7 +49,11 @@ PacketDecoder.Format.messageMetadata = function(cmd, length, buffer) {
 // TRANSFORM
 
 PacketDecoder.prototype._transform = function(packet, encoding, done) {
-	var packetData = packet.data;
+	// wrap data in a ByteBuffer; offers pretty cool stuff like
+	// varint32 decoding with a nice offset set.
+	// TODO : Decoders should handle their data as a ByteBuffer instead
+	// of node's native buffers.
+	var packetData = ByteBuffer.wrap(packet.data, true);
 	var packetMeta = packet.metadata;
 	var decoder = PacketDecoder.Decoders[packetMeta.cmd];
 	// empty packet or no decoder found, skip

@@ -1,5 +1,5 @@
 {
-    "package": null,
+    "package": "UserMessages",
     "messages": [
         {
             "name": "CCSUsrMsg_VGUIMenu",

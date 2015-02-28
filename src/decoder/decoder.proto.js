@@ -12,7 +12,7 @@ var NetMessage = NetMessageBuilder.build('NetMessages'); // return the messages 
 
 var UserMessageBuilder = new ProtoBuf.Builder();
 UserMessageBuilder.import(UserMessageProto);
-var UserMessage = UserMessageBuilder.build();
+var UserMessage = UserMessageBuilder.build('UserMessages');
 
 module.exports = {
 	UserMessageBuilder: UserMessageBuilder,

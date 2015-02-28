@@ -1,13 +1,17 @@
 var Util = require('util')
 	, Varint = require('varint')
 	, ProtoBuff = require('protobufjs')
+	, ByteBuffer = require('bytebuffer')
 	, _ = require('lodash');
 // Proto
 var NetMessageProto = require('../../protobuf/netmessages.proto.json');
 var UserMessageProto = require('../../protobuf/usermessages.proto.json');
 
 var NetMessage = require('./decoder.proto.js').NetMessage;
+var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
+
 var UserMessage = require('./decoder.proto.js').UserMessage;
+var UserMessageBuilder = require('./decoder.proto.js').UserMessageBuilder;
 
 // TODO the collection should be able to whitelist/blacklist packets
 // (as in, not even decoded, purely skiped)
@@ -34,14 +38,14 @@ DemoMessages.prototype.toJSON = function() {
 
 // iterator func
 DemoMessages.prototype.getNextMessage_ = function* () {
-	while (this.data.length > 0) {
+	while (this.data.remaining() > 0) {
 		var meta = this.getMessageMetadata_();
 		// extract the message's raw data
-		var encodedMessage = this.data.slice(0, meta.length);
-		this.data = this.data.slice(meta.length); // offset this.data
+		// var encodedMessage = this.data.slice(0, meta.length);
+		// this.data = this.data.slice(meta.length); // offset this.data
 		// get the message model
 		var message = new DemoMessage(
-			meta, encodedMessage);
+			meta, this.data);
 		yield message; // return message
 	}
 };
@@ -55,12 +59,14 @@ DemoMessages.prototype.decodeMessages_ = function() {
 // Decode the message's meta from the chunk and offset
 DemoMessages.prototype.getMessageMetadata_ = function() {
 	// varint32 encoded message cmd
-	var messageCmd = Varint.decode(this.data);
+	// var messageCmd = Varint.decode(this.data);
+	var messageCmd = this.data.readVarint32();
+	var messageLength = this.data.readVarint32();
 	// offset buffer with the size (B) of the decoded varint
-	this.data = this.data.slice(Varint.decode.bytes);
+	// this.data = this.data.slice(Varint.decode.bytes);
 	// message length
-	var messageLength = Varint.decode(this.data);
-	this.data = this.data.slice(Varint.decode.bytes); // offset
+	// var messageLength = Varint.decode(this.data);
+	// this.data = this.data.slice(Varint.decode.bytes); // offset
 	return {
 		cmd: messageCmd,
 		length: messageLength
@@ -69,6 +75,8 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
 
 
 // DemoMessage model
+
+// CSVCMsg_GameEventList -> list of game events
 
 // DT_CSPlayer look for this
 // --> Next priority should be datatables decoding
@@ -83,6 +91,8 @@ var DemoMessage = function(packetMeta, data) {
 	// The base message is always a NetMessage, but there can be
 	// anything nested in this message (UserMessage, stringtable, etc..)
 	this.setMessageType(packetMeta.cmd);
+	this.byteSize = packetMeta.length;
+
 	var netMessageName = this.getMessageName('net', packetMeta.cmd);
 	var netMessage = this.decodeNetMessage(netMessageName, data);
 
@@ -98,6 +108,8 @@ var DemoMessage = function(packetMeta, data) {
 		this.message = netMessage;
 		this.messageName = netMessageName;
 	}
+	// console.log(this.message)
+	// process.exit(0)
 };
 
 // Get a message name from a proto enum.
@@ -144,13 +156,46 @@ DemoMessage.prototype.decodeNetMessage = function(messageName, data) {
 	// TODO should keep some stats on these
 	if (!messageName)
 		return null;
-	// decode the message
-	return NetMessage[messageName].decode(data);
+	// offset & decode the message
+	// var messageData = data.slice(null, this.byteSize);
+	// data.skip(this.byteSize);
+
+	var Message = NetMessageBuilder.lookup('NetMessages.' + messageName);
+	// console.log(messageName, this.byteSize, Message.isGroup);
+	// return Message.decode(data, this.byteSize);
+
+	// var a = NetMessage.lookup('NetMessages.CSVCMsg_SendTable');
+	// console.log('AAA ',a); process.exit(0)
+	console.log(data, messageName)
+	// var messageData = data.slice(0, this.byteSize);
+	// data.skip(this.byteSize);
+	// console.log(messageData instanceof ByteBuffer)
+
+	if (messageName === 'CSVCMsg_ClassInfo') {
+
+		// var itemsize = data.readVarint32();
+		console.log('\n\n', this.byteSize);
+		var decoded = Message.decode(data, this.byteSize);
+		console.log(decoded);
+		// process.exit(0);
+	} else {
+		var decoded = Message.decode(data, this.byteSize);
+	}
+
+	console.log('decoded ', decoded)
+	return decoded;
+	// var lol;
+	// lol = NetMessage[messageName].decode(messageData);
+	// return lol
 };
 
 DemoMessage.prototype.decodeUserMessage = function(messageName, data) {
 	if (!messageName)
 		return null;
 	// decode the message
-	return UserMessage[messageName].decode(data);
+	// var messageData = data.slice(null, this.byteSize);
+	// data.skip(this.byteSize);
+	var Message = UserMessageBuilder.lookup('UserMessages.' + messageName);
+	return Message.decode(data, this.byteSize);
+	// return UserMessage[messageName].decodeDelimited(data);
 };

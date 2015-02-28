@@ -13,7 +13,6 @@
 var Util = require('util')
 	, Varint = require('varint')
 	, ProtoBuff = require('protobufjs')
-	, ByteBuffer = require('bytebuffer')
 	, _ = require('lodash');
 // Proto
 var NetMessage = require('./decoder.proto.js').NetMessage;
@@ -21,11 +20,8 @@ var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
 
 // A DataTableMessage collection.
 var DataTableMessages = function(meta, data) {
-	// wrap data in a ByteBuffer; offers pretty cool stuff like
-	// varint32 decoding with a nice offset set.
-	// TODO : Decoders should handle their data as a ByteBuffer instead
-	// of node's native buffers.
-	this.data = ByteBuffer.wrap(data);
+	// this.data = ByteBuffer.wrap(data);
+	this.data = data;
 	this.metadata = data;
 	// unique DataTableMessages
 	this.isEnd = false;
@@ -85,6 +81,5 @@ DataTableMessage.prototype.decodeDataTable = function(data) {
 	this.byteSize = data.readVarint32();
 
 	var Message = NetMessageBuilder.lookup('NetMessages.CSVCMsg_SendTable');
-	var group = Message.isGroup;
 	return Message.decode(data, this.byteSize, 1);
 };
