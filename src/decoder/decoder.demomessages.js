@@ -3,13 +3,19 @@ var Util = require('util')
 	, ProtoBuff = require('protobufjs')
 	, ByteBuffer = require('bytebuffer')
 	, _ = require('lodash');
-// Proto
 
-// var NetMessage = require('./decoder.proto.js').NetMessage;
-// var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
-
+// Concat of netmessages.proto & cstrike15_usermessages.proto
+// -> simplifies imports & namespacing
 var CSGOMessages = require('./decoder.proto.js');
-// var UserMessageBuilder = require('./decoder.proto.js').UserMessageBuilder;
+
+// Invert the message names enums to lookup names by cmd
+// when resolving a message header.
+var invNet = _.invert(
+	CSGOMessages.lookup('CSGOMessages.NET_Messages').build());
+var invSvc = _.invert(
+	CSGOMessages.lookup('CSGOMessages.SVC_Messages').build());
+var invUser = _.invert(
+	CSGOMessages.lookup('CSGOMessages.ECstrike15UserMessages').build());
 
 // TODO the collection should be able to whitelist/blacklist packets
 // (as in, not even decoded, purely skiped)
@@ -119,11 +125,6 @@ DemoMessage.prototype.getMessageName = function(type, cmd) {
 		var split = name.split('_');
 		return prefix + '_' + split.pop();
 	};
-
-	// invert messages enums to look up the names by cmd
-	var invNet = _.invert(CSGOMessages.lookup('CSGOMessages.NET_Messages'));
-	var invSvc = _.invert(CSGOMessages.lookup('CSGOMessages.SVC_Messages'));
-	var invUser = _.invert(CSGOMessages.lookup('CSGOMessages.ECstrike15UserMessages'));
 
 	var messageName;
 	if (type === 'net') {

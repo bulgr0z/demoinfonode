@@ -51,18 +51,13 @@ PacketDecoder.Format.messageMetadata = function(cmd, length, buffer) {
 PacketDecoder.prototype._transform = function(packet, encoding, done) {
 	// wrap data in a ByteBuffer; offers pretty cool stuff like
 	// varint32 decoding with a nice offset set.
-	// TODO : Decoders should handle their data as a ByteBuffer instead
-	// of node's native buffers.
-	// console.log('NEW TRANSFORM')
-	var packetData = ByteBuffer.wrap(packet.data, true);
-	// var packetData = packet.data;
+	var packetData = ByteBuffer.wrap(packet.data, true); // le == true
 	var packetMeta = packet.metadata;
 	var decoder = PacketDecoder.Decoders[packetMeta.cmd];
 	// empty packet or no decoder found, skip
 	if (!decoder) return done();
 	// Decodes the packet and return a usable messages collection
 	var messages = new decoder(packetMeta, packetData);
-	// console.log('GOT ALL MESSAGES, PUSHING', messages.metadata)
 	this.push(messages.toJSON());
 	return done();
 };
