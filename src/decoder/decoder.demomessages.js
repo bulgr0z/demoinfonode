@@ -44,8 +44,11 @@ DemoMessages.prototype.getNextMessage_ = function* () {
 		// var encodedMessage = this.data.slice(0, meta.length);
 		// this.data = this.data.slice(meta.length); // offset this.data
 		// get the message model
+		// console.log('\nMETA length ', meta.length)
+
 		var message = new DemoMessage(
 			meta, this.data);
+		// console.log('\n\n AFTER MESSAGE ',this.data, this.data.remaining());
 		yield message; // return message
 	}
 };
@@ -62,6 +65,7 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
 	// var messageCmd = Varint.decode(this.data);
 	var messageCmd = this.data.readVarint32();
 	var messageLength = this.data.readVarint32();
+	// console.log('\nCMD / SIZE offset ', this.data.offset)
 	// offset buffer with the size (B) of the decoded varint
 	// this.data = this.data.slice(Varint.decode.bytes);
 	// message length
@@ -93,11 +97,15 @@ var DemoMessage = function(packetMeta, data) {
 	this.setMessageType(packetMeta.cmd);
 	this.byteSize = packetMeta.length;
 
+
 	var netMessageName = this.getMessageName('net', packetMeta.cmd);
 	var netMessage = this.decodeNetMessage(netMessageName, data);
+	// console.log('\nNEW DEMO MESSAGE\n', netMessageName, packetMeta.cmd)
 
 	// we have a nested UserMessage, decode it
 	if (netMessageName === 'CSVCMsg_UserMessage') {
+		// console.log(netMessage, data);
+		// process.exit(0)
 		var userMessageName = this.getMessageName('user', netMessage.msg_type);
 		userMessage = this.decodeUserMessage(userMessageName, netMessage.msg_data);
 		// set the message
@@ -154,8 +162,10 @@ DemoMessage.prototype.setMessageType = function(cmd) {
 DemoMessage.prototype.decodeNetMessage = function(messageName, data) {
 	// The given command was not found in the proto enums
 	// TODO should keep some stats on these
-	if (!messageName)
+	if (!messageName) {
+		data.skip(this.byteSize);
 		return null;
+	}
 	// offset & decode the message
 	// var messageData = data.slice(null, this.byteSize);
 	// data.skip(this.byteSize);
@@ -166,23 +176,23 @@ DemoMessage.prototype.decodeNetMessage = function(messageName, data) {
 
 	// var a = NetMessage.lookup('NetMessages.CSVCMsg_SendTable');
 	// console.log('AAA ',a); process.exit(0)
-	console.log(data, messageName)
+	// console.log(data, messageName)
 	// var messageData = data.slice(0, this.byteSize);
 	// data.skip(this.byteSize);
 	// console.log(messageData instanceof ByteBuffer)
+	// console.log('\n', data, '\n', this.byteSize);
 
 	if (messageName === 'CSVCMsg_ClassInfo') {
 
 		// var itemsize = data.readVarint32();
-		console.log('\n\n', this.byteSize);
 		var decoded = Message.decode(data, this.byteSize);
-		console.log(decoded);
+		// console.log(decoded);
 		// process.exit(0);
 	} else {
 		var decoded = Message.decode(data, this.byteSize);
 	}
 
-	console.log('decoded ', decoded)
+	// console.log('decoded ', decoded)
 	return decoded;
 	// var lol;
 	// lol = NetMessage[messageName].decode(messageData);
@@ -190,12 +200,15 @@ DemoMessage.prototype.decodeNetMessage = function(messageName, data) {
 };
 
 DemoMessage.prototype.decodeUserMessage = function(messageName, data) {
-	if (!messageName)
+	if (!messageName) {
+		data.skip(this.byteSize);
 		return null;
+	}
 	// decode the message
 	// var messageData = data.slice(null, this.byteSize);
 	// data.skip(this.byteSize);
+	// console.log(messageName, this.byteSize, data)
 	var Message = UserMessageBuilder.lookup('UserMessages.' + messageName);
-	return Message.decode(data, this.byteSize);
+	return Message.decode(data, data.remaining());
 	// return UserMessage[messageName].decodeDelimited(data);
 };

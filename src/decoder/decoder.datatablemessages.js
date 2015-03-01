@@ -22,7 +22,7 @@ var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
 var DataTableMessages = function(meta, data) {
 	// this.data = ByteBuffer.wrap(data);
 	this.data = data;
-	this.metadata = data;
+	this.metadata = meta;
 	// unique DataTableMessages
 	this.isEnd = false;
 	this.messages = [];
