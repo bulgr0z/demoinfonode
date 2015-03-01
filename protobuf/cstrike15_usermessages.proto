@@ -59,7 +59,7 @@ option cc_generic_services = false;
 import "google/protobuf/descriptor.proto";
 
 // for CMsgVector, etc.
-import "netmessages_public.proto";
+import "netmessages.proto";
 
 //=============================================================================
 // CStrike15 User Messages
@@ -101,26 +101,33 @@ enum ECstrike15UserMessages
 	CS_UM_AchievementEvent = 33;
 	CS_UM_MatchEndConditions = 34;
 	CS_UM_DisconnectToLobby = 35;
+	CS_UM_PlayerStatsUpdate = 36;
 	CS_UM_DisplayInventory = 37;
 	CS_UM_WarmupHasEnded = 38;	
 	CS_UM_ClientInfo = 39;
+	CS_UM_XRankGet = 40;					// Get ELO Rank Value from Client
+	CS_UM_XRankUpd = 41;					// Update ELO Rank Value on Client
+	CS_UM_SetPlayerEloDisplayBracket = 42;	// Sets the elo bracket to be displayed for the local user
+	CS_UM_RequestEloBracketInfo = 43;		// Ask the client to send up the elo bracket info stored in title data.
+	CS_UM_SetEloBracketInfo = 44;			// Server setting the elo bracket info for a client.
 	CS_UM_CallVoteFailed = 45;
 	CS_UM_VoteStart = 46;
 	CS_UM_VotePass = 47;
 	CS_UM_VoteFailed = 48;
 	CS_UM_VoteSetup = 49;
+	CS_UM_ServerRankRevealAll = 50;
 	CS_UM_SendLastKillerDamageToClient = 51;
+	CS_UM_ServerRankUpdate = 52;
 	CS_UM_ItemPickup = 53;
 	CS_UM_ShowMenu = 54;					// show hud menu
 	CS_UM_BarTime = 55;						// For the C4 progress bar.
 	CS_UM_AmmoDenied = 56;
 	CS_UM_MarkAchievement = 57;
+	CS_UM_MatchStatsUpdate = 58;
 	CS_UM_ItemDrop = 59;
-	CS_UM_GlowPropTurnOff = 60;
 }
 
 //=============================================================================
-
 
 message CCSUsrMsg_VGUIMenu
 {
@@ -156,7 +163,6 @@ message CCSUsrMsg_SayText
 	optional int32 ent_idx = 1;
 	optional string text = 2;
 	optional bool chat = 3;
-	optional bool textallchat = 4;
 }
 
 message CCSUsrMsg_SayText2
@@ -165,7 +171,6 @@ message CCSUsrMsg_SayText2
 	optional bool chat = 2;
 	optional string msg_name = 3;
 	repeated string params = 4;
-	optional bool textallchat = 5;
 }
 
 message CCSUsrMsg_TextMsg
@@ -274,6 +279,8 @@ message CCSUsrMsg_KeyHintText
 	repeated string hints = 1;
 }
 
+// gurjeets - Message below is slightly bigger in size than the non-protobuf version,
+// by around 8 bits. 
 message CCSUsrMsg_ProcessSpottedEntityUpdate
 {
 	optional bool new_update = 1;
@@ -297,7 +304,6 @@ message CCSUsrMsg_ProcessSpottedEntityUpdate
 message CCSUsrMsg_ReloadEffect
 {
 	optional int32 entidx = 1;
-	optional int32 actanim = 2;
 }
 
 message CCSUsrMsg_AdjustMoney
@@ -341,10 +347,56 @@ message CCSUsrMsg_MatchEndConditions
 	optional int32 mp_timelimit = 4;
 }
 
+message CCSUsrMsg_PlayerStatsUpdate
+{
+	optional int32 version = 1;
+	optional int32 official_server = 2;
+	
+	message Stat
+	{
+		optional int32 idx = 1;
+		optional int32 delta = 2;
+	}
+
+	repeated Stat stats = 4;
+	optional int32 user_id = 5;
+	optional int32 crc = 6;
+}
+
 message CCSUsrMsg_DisplayInventory
 {
 	optional bool display = 1;
-	optional int32 user_id = 2;
+}
+
+message CCSUsrMsg_XRankGet
+{
+	optional int32 mode_idx = 1;
+	optional int32 controller = 2;
+}
+
+message CCSUsrMsg_XRankUpd
+{
+	optional int32 mode_idx = 1;
+	optional int32 controller = 2;
+	optional int32 ranking = 3;
+}
+
+message CCSUsrMsg_SetPlayerEloDisplayBracket
+{
+	optional int32 bracket = 1;
+}
+
+message CCSUsrMsg_RequestEloBracketInfo
+{
+	optional int32 bracket = 1;
+}
+
+message CCSUsrMsg_SetEloBracketInfo
+{
+	optional int32 game_mode = 1;
+	optional int32 display_bracket = 2;
+	optional int32 prev_bracket = 3;
+	optional int32 num_games_in_bracket = 4;
 }
 
 message CCSUsrMsg_CallVoteFailed
@@ -392,6 +444,20 @@ message CCSUsrMsg_SendLastKillerDamageToClient
 	optional int32 damage_taken = 4;
 }
 
+message CCSUsrMsg_ServerRankUpdate
+{
+	message RankUpdate
+	{
+		optional int32 account_id = 1;
+		optional int32 rank_old = 2;
+		optional int32 rank_new = 3;
+		optional int32 num_wins = 4;
+		optional float rank_change = 5;
+	}
+
+	repeated RankUpdate rank_update = 1;
+}
+
 message CCSUsrMsg_ItemPickup
 {
 	optional string item = 1;
@@ -419,28 +485,19 @@ message CCSUsrMsg_MarkAchievement
 	optional string achievement = 1;
 }
 
+message CCSUsrMsg_MatchStatsUpdate
+{
+	optional string update = 1;
+}
+
 message CCSUsrMsg_ItemDrop
 {
 	optional int64 itemid = 1;
 	optional bool death = 2;
 }
 
-message CCSUsrMsg_GlowPropTurnOff
-{
-	optional int32 entidx = 1;
-}
-
-message CCSUsrMsg_RoundBackupFilenames
-{
-	optional int32 count = 1;
-	optional int32 index = 2;
-    optional string filename = 3;
-    optional string nicename = 4;
-}
-
-
 //=============================================================================
-// Messages where the data is irrelevant
+// Messages where the data seems to be irrelevant
 //=============================================================================
 
 message CCSUsrMsg_ResetHud
@@ -474,6 +531,11 @@ message CCSUsrMsg_WarmupHasEnded
 }
 
 message CCSUsrMsg_ClientInfo
+{
+	optional int32 dummy = 1;
+}
+
+message CCSUsrMsg_ServerRankRevealAll
 {
 	optional int32 dummy = 1;
 }

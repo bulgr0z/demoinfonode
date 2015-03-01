@@ -1,5 +1,5 @@
 // DataTable
-//  - Begin loop 
+//  - Begin loop
 //		Read datatable message
 //		`is_end=true` message prop
 //		break
@@ -15,8 +15,7 @@ var Util = require('util')
 	, ProtoBuff = require('protobufjs')
 	, _ = require('lodash');
 // Proto
-var NetMessage = require('./decoder.proto.js').NetMessage;
-var NetMessageBuilder = require('./decoder.proto.js').NetMessageBuilder;
+var CSGOMessages = require('./decoder.proto.js');
 
 // A DataTableMessage collection.
 var DataTableMessages = function(meta, data) {
@@ -80,6 +79,6 @@ DataTableMessage.prototype.decodeDataTable = function(data) {
 	this.type = data.readVarint32();
 	this.byteSize = data.readVarint32();
 
-	var Message = NetMessageBuilder.lookup('NetMessages.CSVCMsg_SendTable');
+	var Message = CSGOMessages.lookup('CSGOMessages.CSVCMsg_SendTable');
 	return Message.decode(data, this.byteSize, 1);
 };
