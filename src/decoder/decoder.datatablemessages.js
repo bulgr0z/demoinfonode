@@ -42,11 +42,12 @@ DataTableMessages.prototype.getNextMessage_ = function* () {
 	// while the last is_end has been decoded
 	while (this.isEnd === false) {
 		// NOTE : decoding a message from a ByteBuffer with Protobufjs
-		// will nicely set the buffer's offset for us. -> We don't need to keep track
+		// will nicely set the buffer's offset -> We don't need to keep track
 		// of `data` cursor.
 		var model = new DataTableMessage(this.data);
 		// last message has `is_end:true`
-		if (model.message.$get('is_end'))
+		// if (model.message.$get('is_end'))
+		if (model.message.getIsEnd())
 			this.isEnd = true;
 
 		yield model; // return message

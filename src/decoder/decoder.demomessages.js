@@ -72,12 +72,6 @@ DemoMessages.prototype.getMessageMetadata_ = function() {
 
 // DemoMessage model
 
-// CSVCMsg_GameEventList -> list of game events
-
-// DT_CSPlayer look for this
-// --> Next priority should be datatables decoding
-// deadflag = 1
-
 /**
  * @constructor {DemoMessage} a single DemoMessage
  * @param {Object} packetMeta The message's metadata
@@ -95,7 +89,7 @@ var DemoMessage = function(packetMeta, data) {
 		netMessageName,
 		data,
 		this.byteSize);
-	// we have a nested UserMessage, decode it
+	// found a nested UserMessage, decode it
 	if (netMessageName === 'CSVCMsg_UserMessage') {
 		var userMessageName = this.getMessageName('user', netMessage.msg_type);
 		// Decode a nested UserMessage with the cmd & buffer found in
@@ -107,6 +101,10 @@ var DemoMessage = function(packetMeta, data) {
 
 		// set the message
 		this.message = userMessage;
+		// this.message = userMessage ?
+		// 	userMessage.toRaw() :
+		// 	{};
+
 		this.messageName = userMessageName;
 	} else {
 		// no user message, the message is the netMessage
