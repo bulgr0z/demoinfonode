@@ -1,0 +1,3310 @@
+{
+ "byteSize": 11725,
+ "message": {
+  "descriptors": [
+   {
+    "eventid": 0,
+    "name": "server_spawn",
+    "keys": [
+     {
+      "type": 1,
+      "name": "hostname"
+     },
+     {
+      "type": 1,
+      "name": "address"
+     },
+     {
+      "type": 4,
+      "name": "port"
+     },
+     {
+      "type": 1,
+      "name": "game"
+     },
+     {
+      "type": 1,
+      "name": "mapname"
+     },
+     {
+      "type": 3,
+      "name": "maxplayers"
+     },
+     {
+      "type": 1,
+      "name": "os"
+     },
+     {
+      "type": 6,
+      "name": "dedicated"
+     },
+     {
+      "type": 6,
+      "name": "official"
+     },
+     {
+      "type": 6,
+      "name": "password"
+     }
+    ]
+   },
+   {
+    "eventid": 1,
+    "name": "server_pre_shutdown",
+    "keys": [
+     {
+      "type": 1,
+      "name": "reason"
+     }
+    ]
+   },
+   {
+    "eventid": 2,
+    "name": "server_shutdown",
+    "keys": [
+     {
+      "type": 1,
+      "name": "reason"
+     }
+    ]
+   },
+   {
+    "eventid": 3,
+    "name": "server_cvar",
+    "keys": [
+     {
+      "type": 1,
+      "name": "cvarname"
+     },
+     {
+      "type": 1,
+      "name": "cvarvalue"
+     }
+    ]
+   },
+   {
+    "eventid": 4,
+    "name": "server_message",
+    "keys": [
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 5,
+    "name": "server_addban",
+    "keys": [
+     {
+      "type": 1,
+      "name": "name"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "networkid"
+     },
+     {
+      "type": 1,
+      "name": "ip"
+     },
+     {
+      "type": 1,
+      "name": "duration"
+     },
+     {
+      "type": 1,
+      "name": "by"
+     },
+     {
+      "type": 6,
+      "name": "kicked"
+     }
+    ]
+   },
+   {
+    "eventid": 6,
+    "name": "server_removeban",
+    "keys": [
+     {
+      "type": 1,
+      "name": "networkid"
+     },
+     {
+      "type": 1,
+      "name": "ip"
+     },
+     {
+      "type": 1,
+      "name": "by"
+     }
+    ]
+   },
+   {
+    "eventid": 7,
+    "name": "player_connect",
+    "keys": [
+     {
+      "type": 1,
+      "name": "name"
+     },
+     {
+      "type": 5,
+      "name": "index"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "networkid"
+     },
+     {
+      "type": 1,
+      "name": "address"
+     }
+    ]
+   },
+   {
+    "eventid": 8,
+    "name": "player_info",
+    "keys": [
+     {
+      "type": 1,
+      "name": "name"
+     },
+     {
+      "type": 5,
+      "name": "index"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "networkid"
+     },
+     {
+      "type": 6,
+      "name": "bot"
+     }
+    ]
+   },
+   {
+    "eventid": 9,
+    "name": "player_disconnect",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "reason"
+     },
+     {
+      "type": 1,
+      "name": "name"
+     },
+     {
+      "type": 1,
+      "name": "networkid"
+     }
+    ]
+   },
+   {
+    "eventid": 10,
+    "name": "player_activate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 11,
+    "name": "player_connect_full",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "index"
+     }
+    ]
+   },
+   {
+    "eventid": 12,
+    "name": "player_say",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 13,
+    "name": "cs_round_start_beep",
+    "keys": []
+   },
+   {
+    "eventid": 14,
+    "name": "cs_round_final_beep",
+    "keys": []
+   },
+   {
+    "eventid": 15,
+    "name": "round_time_warning",
+    "keys": []
+   },
+   {
+    "eventid": 16,
+    "name": "team_info",
+    "keys": [
+     {
+      "type": 5,
+      "name": "teamid"
+     },
+     {
+      "type": 1,
+      "name": "teamname"
+     }
+    ]
+   },
+   {
+    "eventid": 17,
+    "name": "team_score",
+    "keys": [
+     {
+      "type": 5,
+      "name": "teamid"
+     },
+     {
+      "type": 4,
+      "name": "score"
+     }
+    ]
+   },
+   {
+    "eventid": 18,
+    "name": "teamplay_broadcast_audio",
+    "keys": [
+     {
+      "type": 5,
+      "name": "team"
+     },
+     {
+      "type": 1,
+      "name": "sound"
+     }
+    ]
+   },
+   {
+    "eventid": 19,
+    "name": "gameui_hidden",
+    "keys": []
+   },
+   {
+    "eventid": 20,
+    "name": "items_gifted",
+    "keys": [
+     {
+      "type": 5,
+      "name": "player"
+     },
+     {
+      "type": 3,
+      "name": "itemdef"
+     },
+     {
+      "type": 5,
+      "name": "numgifts"
+     },
+     {
+      "type": 5,
+      "name": "giftidx"
+     },
+     {
+      "type": 3,
+      "name": "accountid"
+     }
+    ]
+   },
+   {
+    "eventid": 21,
+    "name": "player_team",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "team"
+     },
+     {
+      "type": 5,
+      "name": "oldteam"
+     },
+     {
+      "type": 6,
+      "name": "disconnect"
+     },
+     {
+      "type": 6,
+      "name": "autoteam"
+     },
+     {
+      "type": 6,
+      "name": "silent"
+     },
+     {
+      "type": 6,
+      "name": "isbot"
+     }
+    ]
+   },
+   {
+    "eventid": 22,
+    "name": "player_class",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "class"
+     }
+    ]
+   },
+   {
+    "eventid": 23,
+    "name": "player_death",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "attacker"
+     },
+     {
+      "type": 4,
+      "name": "assister"
+     },
+     {
+      "type": 1,
+      "name": "weapon"
+     },
+     {
+      "type": 1,
+      "name": "weapon_itemid"
+     },
+     {
+      "type": 1,
+      "name": "weapon_fauxitemid"
+     },
+     {
+      "type": 1,
+      "name": "weapon_originalowner_xuid"
+     },
+     {
+      "type": 6,
+      "name": "headshot"
+     },
+     {
+      "type": 4,
+      "name": "dominated"
+     },
+     {
+      "type": 4,
+      "name": "revenge"
+     },
+     {
+      "type": 4,
+      "name": "penetrated"
+     }
+    ]
+   },
+   {
+    "eventid": 24,
+    "name": "player_hurt",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "attacker"
+     },
+     {
+      "type": 5,
+      "name": "health"
+     },
+     {
+      "type": 5,
+      "name": "armor"
+     },
+     {
+      "type": 1,
+      "name": "weapon"
+     },
+     {
+      "type": 4,
+      "name": "dmg_health"
+     },
+     {
+      "type": 5,
+      "name": "dmg_armor"
+     },
+     {
+      "type": 5,
+      "name": "hitgroup"
+     }
+    ]
+   },
+   {
+    "eventid": 25,
+    "name": "player_chat",
+    "keys": [
+     {
+      "type": 6,
+      "name": "teamonly"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 26,
+    "name": "player_score",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "kills"
+     },
+     {
+      "type": 4,
+      "name": "deaths"
+     },
+     {
+      "type": 4,
+      "name": "score"
+     }
+    ]
+   },
+   {
+    "eventid": 27,
+    "name": "player_spawn",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "teamnum"
+     }
+    ]
+   },
+   {
+    "eventid": 28,
+    "name": "player_shoot",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "weapon"
+     },
+     {
+      "type": 5,
+      "name": "mode"
+     }
+    ]
+   },
+   {
+    "eventid": 29,
+    "name": "player_use",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entity"
+     }
+    ]
+   },
+   {
+    "eventid": 30,
+    "name": "player_changename",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "oldname"
+     },
+     {
+      "type": 1,
+      "name": "newname"
+     }
+    ]
+   },
+   {
+    "eventid": 31,
+    "name": "player_hintmessage",
+    "keys": [
+     {
+      "type": 1,
+      "name": "hintmessage"
+     }
+    ]
+   },
+   {
+    "eventid": 32,
+    "name": "game_init",
+    "keys": []
+   },
+   {
+    "eventid": 33,
+    "name": "game_newmap",
+    "keys": [
+     {
+      "type": 1,
+      "name": "mapname"
+     }
+    ]
+   },
+   {
+    "eventid": 34,
+    "name": "game_start",
+    "keys": [
+     {
+      "type": 3,
+      "name": "roundslimit"
+     },
+     {
+      "type": 3,
+      "name": "timelimit"
+     },
+     {
+      "type": 3,
+      "name": "fraglimit"
+     },
+     {
+      "type": 1,
+      "name": "objective"
+     }
+    ]
+   },
+   {
+    "eventid": 35,
+    "name": "game_end",
+    "keys": [
+     {
+      "type": 5,
+      "name": "winner"
+     }
+    ]
+   },
+   {
+    "eventid": 36,
+    "name": "round_start",
+    "keys": [
+     {
+      "type": 3,
+      "name": "timelimit"
+     },
+     {
+      "type": 3,
+      "name": "fraglimit"
+     },
+     {
+      "type": 1,
+      "name": "objective"
+     }
+    ]
+   },
+   {
+    "eventid": 37,
+    "name": "round_announce_match_point",
+    "keys": []
+   },
+   {
+    "eventid": 38,
+    "name": "round_announce_final",
+    "keys": []
+   },
+   {
+    "eventid": 39,
+    "name": "round_announce_last_round_half",
+    "keys": []
+   },
+   {
+    "eventid": 40,
+    "name": "round_announce_match_start",
+    "keys": []
+   },
+   {
+    "eventid": 41,
+    "name": "round_announce_warmup",
+    "keys": []
+   },
+   {
+    "eventid": 42,
+    "name": "round_end",
+    "keys": [
+     {
+      "type": 5,
+      "name": "winner"
+     },
+     {
+      "type": 5,
+      "name": "reason"
+     },
+     {
+      "type": 1,
+      "name": "message"
+     }
+    ]
+   },
+   {
+    "eventid": 43,
+    "name": "round_end_upload_stats",
+    "keys": []
+   },
+   {
+    "eventid": 44,
+    "name": "round_officially_ended",
+    "keys": []
+   },
+   {
+    "eventid": 45,
+    "name": "ugc_map_info_received",
+    "keys": [
+     {
+      "type": 7,
+      "name": "published_file_id"
+     }
+    ]
+   },
+   {
+    "eventid": 46,
+    "name": "ugc_map_unsubscribed",
+    "keys": [
+     {
+      "type": 7,
+      "name": "published_file_id"
+     }
+    ]
+   },
+   {
+    "eventid": 47,
+    "name": "ugc_map_download_error",
+    "keys": [
+     {
+      "type": 7,
+      "name": "published_file_id"
+     },
+     {
+      "type": 3,
+      "name": "error_code"
+     }
+    ]
+   },
+   {
+    "eventid": 48,
+    "name": "ugc_file_download_finished",
+    "keys": [
+     {
+      "type": 7,
+      "name": "hcontent"
+     }
+    ]
+   },
+   {
+    "eventid": 49,
+    "name": "ugc_file_download_start",
+    "keys": [
+     {
+      "type": 7,
+      "name": "hcontent"
+     },
+     {
+      "type": 7,
+      "name": "published_file_id"
+     }
+    ]
+   },
+   {
+    "eventid": 50,
+    "name": "begin_new_match",
+    "keys": []
+   },
+   {
+    "eventid": 51,
+    "name": "round_start_pre_entity",
+    "keys": []
+   },
+   {
+    "eventid": 52,
+    "name": "teamplay_round_start",
+    "keys": [
+     {
+      "type": 6,
+      "name": "full_reset"
+     }
+    ]
+   },
+   {
+    "eventid": 53,
+    "name": "hostname_changed",
+    "keys": [
+     {
+      "type": 1,
+      "name": "hostname"
+     }
+    ]
+   },
+   {
+    "eventid": 54,
+    "name": "difficulty_changed",
+    "keys": [
+     {
+      "type": 4,
+      "name": "newDifficulty"
+     },
+     {
+      "type": 4,
+      "name": "oldDifficulty"
+     },
+     {
+      "type": 1,
+      "name": "strDifficulty"
+     }
+    ]
+   },
+   {
+    "eventid": 55,
+    "name": "finale_start",
+    "keys": [
+     {
+      "type": 4,
+      "name": "rushes"
+     }
+    ]
+   },
+   {
+    "eventid": 56,
+    "name": "game_message",
+    "keys": [
+     {
+      "type": 5,
+      "name": "target"
+     },
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 57,
+    "name": "dm_bonus_weapon_start",
+    "keys": [
+     {
+      "type": 4,
+      "name": "time"
+     },
+     {
+      "type": 4,
+      "name": "wepID"
+     }
+    ]
+   },
+   {
+    "eventid": 58,
+    "name": "break_breakable",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "material"
+     }
+    ]
+   },
+   {
+    "eventid": 59,
+    "name": "break_prop",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 60,
+    "name": "player_decal",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 61,
+    "name": "entity_killed",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex_killed"
+     },
+     {
+      "type": 3,
+      "name": "entindex_attacker"
+     },
+     {
+      "type": 3,
+      "name": "entindex_inflictor"
+     },
+     {
+      "type": 3,
+      "name": "damagebits"
+     }
+    ]
+   },
+   {
+    "eventid": 62,
+    "name": "bonus_updated",
+    "keys": [
+     {
+      "type": 4,
+      "name": "numadvanced"
+     },
+     {
+      "type": 4,
+      "name": "numbronze"
+     },
+     {
+      "type": 4,
+      "name": "numsilver"
+     },
+     {
+      "type": 4,
+      "name": "numgold"
+     }
+    ]
+   },
+   {
+    "eventid": 63,
+    "name": "player_stats_updated",
+    "keys": [
+     {
+      "type": 6,
+      "name": "forceupload"
+     }
+    ]
+   },
+   {
+    "eventid": 64,
+    "name": "achievement_event",
+    "keys": [
+     {
+      "type": 1,
+      "name": "achievement_name"
+     },
+     {
+      "type": 4,
+      "name": "cur_val"
+     },
+     {
+      "type": 4,
+      "name": "max_val"
+     }
+    ]
+   },
+   {
+    "eventid": 65,
+    "name": "achievement_increment",
+    "keys": [
+     {
+      "type": 3,
+      "name": "achievement_id"
+     },
+     {
+      "type": 4,
+      "name": "cur_val"
+     },
+     {
+      "type": 4,
+      "name": "max_val"
+     }
+    ]
+   },
+   {
+    "eventid": 66,
+    "name": "achievement_earned",
+    "keys": [
+     {
+      "type": 5,
+      "name": "player"
+     },
+     {
+      "type": 4,
+      "name": "achievement"
+     }
+    ]
+   },
+   {
+    "eventid": 67,
+    "name": "achievement_write_failed",
+    "keys": []
+   },
+   {
+    "eventid": 68,
+    "name": "physgun_pickup",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     }
+    ]
+   },
+   {
+    "eventid": 69,
+    "name": "flare_ignite_npc",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     }
+    ]
+   },
+   {
+    "eventid": 70,
+    "name": "helicopter_grenade_punt_miss",
+    "keys": []
+   },
+   {
+    "eventid": 71,
+    "name": "user_data_downloaded",
+    "keys": []
+   },
+   {
+    "eventid": 72,
+    "name": "ragdoll_dissolved",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     }
+    ]
+   },
+   {
+    "eventid": 73,
+    "name": "gameinstructor_draw",
+    "keys": []
+   },
+   {
+    "eventid": 74,
+    "name": "gameinstructor_nodraw",
+    "keys": []
+   },
+   {
+    "eventid": 75,
+    "name": "map_transition",
+    "keys": []
+   },
+   {
+    "eventid": 76,
+    "name": "entity_visible",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "subject"
+     },
+     {
+      "type": 1,
+      "name": "classname"
+     },
+     {
+      "type": 1,
+      "name": "entityname"
+     }
+    ]
+   },
+   {
+    "eventid": 77,
+    "name": "set_instructor_group_enabled",
+    "keys": [
+     {
+      "type": 1,
+      "name": "group"
+     },
+     {
+      "type": 4,
+      "name": "enabled"
+     }
+    ]
+   },
+   {
+    "eventid": 78,
+    "name": "instructor_server_hint_create",
+    "keys": [
+     {
+      "type": 1,
+      "name": "hint_name"
+     },
+     {
+      "type": 1,
+      "name": "hint_replace_key"
+     },
+     {
+      "type": 3,
+      "name": "hint_target"
+     },
+     {
+      "type": 4,
+      "name": "hint_activator_userid"
+     },
+     {
+      "type": 4,
+      "name": "hint_timeout"
+     },
+     {
+      "type": 1,
+      "name": "hint_icon_onscreen"
+     },
+     {
+      "type": 1,
+      "name": "hint_icon_offscreen"
+     },
+     {
+      "type": 1,
+      "name": "hint_caption"
+     },
+     {
+      "type": 1,
+      "name": "hint_activator_caption"
+     },
+     {
+      "type": 1,
+      "name": "hint_color"
+     },
+     {
+      "type": 2,
+      "name": "hint_icon_offset"
+     },
+     {
+      "type": 2,
+      "name": "hint_range"
+     },
+     {
+      "type": 3,
+      "name": "hint_flags"
+     },
+     {
+      "type": 1,
+      "name": "hint_binding"
+     },
+     {
+      "type": 1,
+      "name": "hint_gamepad_binding"
+     },
+     {
+      "type": 6,
+      "name": "hint_allow_nodraw_target"
+     },
+     {
+      "type": 6,
+      "name": "hint_nooffscreen"
+     },
+     {
+      "type": 6,
+      "name": "hint_forcecaption"
+     },
+     {
+      "type": 6,
+      "name": "hint_local_player_only"
+     }
+    ]
+   },
+   {
+    "eventid": 79,
+    "name": "instructor_server_hint_stop",
+    "keys": [
+     {
+      "type": 1,
+      "name": "hint_name"
+     }
+    ]
+   },
+   {
+    "eventid": 80,
+    "name": "read_game_titledata",
+    "keys": [
+     {
+      "type": 4,
+      "name": "controllerId"
+     }
+    ]
+   },
+   {
+    "eventid": 81,
+    "name": "write_game_titledata",
+    "keys": [
+     {
+      "type": 4,
+      "name": "controllerId"
+     }
+    ]
+   },
+   {
+    "eventid": 82,
+    "name": "reset_game_titledata",
+    "keys": [
+     {
+      "type": 4,
+      "name": "controllerId"
+     }
+    ]
+   },
+   {
+    "eventid": 83,
+    "name": "weapon_reload_database",
+    "keys": []
+   },
+   {
+    "eventid": 84,
+    "name": "vote_ended",
+    "keys": []
+   },
+   {
+    "eventid": 85,
+    "name": "vote_started",
+    "keys": [
+     {
+      "type": 1,
+      "name": "issue"
+     },
+     {
+      "type": 1,
+      "name": "param1"
+     },
+     {
+      "type": 5,
+      "name": "team"
+     },
+     {
+      "type": 3,
+      "name": "initiator"
+     }
+    ]
+   },
+   {
+    "eventid": 86,
+    "name": "vote_changed",
+    "keys": [
+     {
+      "type": 5,
+      "name": "vote_option1"
+     },
+     {
+      "type": 5,
+      "name": "vote_option2"
+     },
+     {
+      "type": 5,
+      "name": "vote_option3"
+     },
+     {
+      "type": 5,
+      "name": "vote_option4"
+     },
+     {
+      "type": 5,
+      "name": "vote_option5"
+     },
+     {
+      "type": 5,
+      "name": "potentialVotes"
+     }
+    ]
+   },
+   {
+    "eventid": 87,
+    "name": "vote_passed",
+    "keys": [
+     {
+      "type": 1,
+      "name": "details"
+     },
+     {
+      "type": 1,
+      "name": "param1"
+     },
+     {
+      "type": 5,
+      "name": "team"
+     }
+    ]
+   },
+   {
+    "eventid": 88,
+    "name": "vote_failed",
+    "keys": [
+     {
+      "type": 5,
+      "name": "team"
+     }
+    ]
+   },
+   {
+    "eventid": 89,
+    "name": "vote_cast",
+    "keys": [
+     {
+      "type": 5,
+      "name": "vote_option"
+     },
+     {
+      "type": 4,
+      "name": "team"
+     },
+     {
+      "type": 3,
+      "name": "entityid"
+     }
+    ]
+   },
+   {
+    "eventid": 90,
+    "name": "vote_options",
+    "keys": [
+     {
+      "type": 5,
+      "name": "count"
+     },
+     {
+      "type": 1,
+      "name": "option1"
+     },
+     {
+      "type": 1,
+      "name": "option2"
+     },
+     {
+      "type": 1,
+      "name": "option3"
+     },
+     {
+      "type": 1,
+      "name": "option4"
+     },
+     {
+      "type": 1,
+      "name": "option5"
+     }
+    ]
+   },
+   {
+    "eventid": 91,
+    "name": "endmatch_mapvote_selecting_map",
+    "keys": [
+     {
+      "type": 5,
+      "name": "count"
+     },
+     {
+      "type": 5,
+      "name": "slot1"
+     },
+     {
+      "type": 5,
+      "name": "slot2"
+     },
+     {
+      "type": 5,
+      "name": "slot3"
+     },
+     {
+      "type": 5,
+      "name": "slot4"
+     },
+     {
+      "type": 5,
+      "name": "slot5"
+     },
+     {
+      "type": 5,
+      "name": "slot6"
+     },
+     {
+      "type": 5,
+      "name": "slot7"
+     },
+     {
+      "type": 5,
+      "name": "slot8"
+     },
+     {
+      "type": 5,
+      "name": "slot9"
+     },
+     {
+      "type": 5,
+      "name": "slot10"
+     }
+    ]
+   },
+   {
+    "eventid": 92,
+    "name": "endmatch_cmm_start_reveal_items",
+    "keys": []
+   },
+   {
+    "eventid": 93,
+    "name": "inventory_updated",
+    "keys": []
+   },
+   {
+    "eventid": 94,
+    "name": "cart_updated",
+    "keys": []
+   },
+   {
+    "eventid": 95,
+    "name": "store_pricesheet_updated",
+    "keys": []
+   },
+   {
+    "eventid": 96,
+    "name": "gc_connected",
+    "keys": []
+   },
+   {
+    "eventid": 97,
+    "name": "item_schema_initialized",
+    "keys": []
+   },
+   {
+    "eventid": 98,
+    "name": "client_loadout_changed",
+    "keys": []
+   },
+   {
+    "eventid": 99,
+    "name": "item_purchase",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "team"
+     },
+     {
+      "type": 1,
+      "name": "weapon"
+     }
+    ]
+   },
+   {
+    "eventid": 100,
+    "name": "bomb_beginplant",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 101,
+    "name": "bomb_abortplant",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 102,
+    "name": "bomb_planted",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 103,
+    "name": "bomb_defused",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 104,
+    "name": "bomb_exploded",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 105,
+    "name": "bomb_dropped",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 3,
+      "name": "entindex"
+     }
+    ]
+   },
+   {
+    "eventid": 106,
+    "name": "bomb_pickup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 107,
+    "name": "defuser_dropped",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entityid"
+     }
+    ]
+   },
+   {
+    "eventid": 108,
+    "name": "defuser_pickup",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entityid"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 109,
+    "name": "announce_phase_end",
+    "keys": []
+   },
+   {
+    "eventid": 110,
+    "name": "cs_intermission",
+    "keys": []
+   },
+   {
+    "eventid": 111,
+    "name": "bomb_begindefuse",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "haskit"
+     }
+    ]
+   },
+   {
+    "eventid": 112,
+    "name": "bomb_abortdefuse",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 113,
+    "name": "hostage_follows",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "hostage"
+     }
+    ]
+   },
+   {
+    "eventid": 114,
+    "name": "hostage_hurt",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "hostage"
+     }
+    ]
+   },
+   {
+    "eventid": 115,
+    "name": "hostage_killed",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "hostage"
+     }
+    ]
+   },
+   {
+    "eventid": 116,
+    "name": "hostage_rescued",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "hostage"
+     },
+     {
+      "type": 4,
+      "name": "site"
+     }
+    ]
+   },
+   {
+    "eventid": 117,
+    "name": "hostage_stops_following",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "hostage"
+     }
+    ]
+   },
+   {
+    "eventid": 118,
+    "name": "hostage_rescued_all",
+    "keys": []
+   },
+   {
+    "eventid": 119,
+    "name": "hostage_call_for_help",
+    "keys": [
+     {
+      "type": 4,
+      "name": "hostage"
+     }
+    ]
+   },
+   {
+    "eventid": 120,
+    "name": "vip_escaped",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 121,
+    "name": "vip_killed",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "attacker"
+     }
+    ]
+   },
+   {
+    "eventid": 122,
+    "name": "player_radio",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "slot"
+     }
+    ]
+   },
+   {
+    "eventid": 123,
+    "name": "bomb_beep",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     }
+    ]
+   },
+   {
+    "eventid": 124,
+    "name": "weapon_fire",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "weapon"
+     },
+     {
+      "type": 6,
+      "name": "silenced"
+     }
+    ]
+   },
+   {
+    "eventid": 125,
+    "name": "weapon_fire_on_empty",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "weapon"
+     }
+    ]
+   },
+   {
+    "eventid": 126,
+    "name": "weapon_outofammo",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 127,
+    "name": "weapon_reload",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 128,
+    "name": "weapon_zoom",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 129,
+    "name": "silencer_detach",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 130,
+    "name": "inspect_weapon",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 131,
+    "name": "weapon_zoom_rifle",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 132,
+    "name": "player_spawned",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "inrestart"
+     }
+    ]
+   },
+   {
+    "eventid": 133,
+    "name": "item_pickup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "item"
+     },
+     {
+      "type": 6,
+      "name": "silent"
+     }
+    ]
+   },
+   {
+    "eventid": 134,
+    "name": "ammo_pickup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "item"
+     },
+     {
+      "type": 3,
+      "name": "index"
+     }
+    ]
+   },
+   {
+    "eventid": 135,
+    "name": "item_equip",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 1,
+      "name": "item"
+     },
+     {
+      "type": 6,
+      "name": "canzoom"
+     },
+     {
+      "type": 6,
+      "name": "hassilencer"
+     },
+     {
+      "type": 6,
+      "name": "issilenced"
+     },
+     {
+      "type": 6,
+      "name": "hastracers"
+     },
+     {
+      "type": 4,
+      "name": "weptype"
+     },
+     {
+      "type": 6,
+      "name": "ispainted"
+     }
+    ]
+   },
+   {
+    "eventid": 136,
+    "name": "enter_buyzone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "canbuy"
+     }
+    ]
+   },
+   {
+    "eventid": 137,
+    "name": "exit_buyzone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "canbuy"
+     }
+    ]
+   },
+   {
+    "eventid": 138,
+    "name": "buytime_ended",
+    "keys": []
+   },
+   {
+    "eventid": 139,
+    "name": "enter_bombzone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "hasbomb"
+     },
+     {
+      "type": 6,
+      "name": "isplanted"
+     }
+    ]
+   },
+   {
+    "eventid": 140,
+    "name": "exit_bombzone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "hasbomb"
+     },
+     {
+      "type": 6,
+      "name": "isplanted"
+     }
+    ]
+   },
+   {
+    "eventid": 141,
+    "name": "enter_rescue_zone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 142,
+    "name": "exit_rescue_zone",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 143,
+    "name": "silencer_off",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 144,
+    "name": "silencer_on",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 145,
+    "name": "buymenu_open",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 146,
+    "name": "buymenu_close",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 147,
+    "name": "round_prestart",
+    "keys": []
+   },
+   {
+    "eventid": 148,
+    "name": "round_poststart",
+    "keys": []
+   },
+   {
+    "eventid": 149,
+    "name": "grenade_bounce",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 150,
+    "name": "hegrenade_detonate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 151,
+    "name": "flashbang_detonate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 152,
+    "name": "smokegrenade_detonate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 153,
+    "name": "smokegrenade_expired",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 154,
+    "name": "molotov_detonate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 155,
+    "name": "decoy_detonate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 156,
+    "name": "decoy_started",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 157,
+    "name": "inferno_startburn",
+    "keys": [
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 158,
+    "name": "inferno_expire",
+    "keys": [
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 159,
+    "name": "inferno_extinguish",
+    "keys": [
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 160,
+    "name": "decoy_firing",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "entityid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 161,
+    "name": "bullet_impact",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 2,
+      "name": "x"
+     },
+     {
+      "type": 2,
+      "name": "y"
+     },
+     {
+      "type": 2,
+      "name": "z"
+     }
+    ]
+   },
+   {
+    "eventid": 162,
+    "name": "player_footstep",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 163,
+    "name": "player_jump",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 164,
+    "name": "player_blind",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 165,
+    "name": "player_falldamage",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 2,
+      "name": "damage"
+     }
+    ]
+   },
+   {
+    "eventid": 166,
+    "name": "door_moving",
+    "keys": [
+     {
+      "type": 3,
+      "name": "entindex"
+     },
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 167,
+    "name": "round_freeze_end",
+    "keys": []
+   },
+   {
+    "eventid": 168,
+    "name": "mb_input_lock_success",
+    "keys": []
+   },
+   {
+    "eventid": 169,
+    "name": "mb_input_lock_cancel",
+    "keys": []
+   },
+   {
+    "eventid": 170,
+    "name": "nav_blocked",
+    "keys": [
+     {
+      "type": 3,
+      "name": "area"
+     },
+     {
+      "type": 6,
+      "name": "blocked"
+     }
+    ]
+   },
+   {
+    "eventid": 171,
+    "name": "nav_generate",
+    "keys": []
+   },
+   {
+    "eventid": 172,
+    "name": "achievement_info_loaded",
+    "keys": []
+   },
+   {
+    "eventid": 173,
+    "name": "spec_target_updated",
+    "keys": [
+     {
+      "type": 5,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 174,
+    "name": "spec_mode_updated",
+    "keys": [
+     {
+      "type": 5,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 175,
+    "name": "hltv_changed_mode",
+    "keys": [
+     {
+      "type": 3,
+      "name": "oldmode"
+     },
+     {
+      "type": 3,
+      "name": "newmode"
+     },
+     {
+      "type": 3,
+      "name": "obs_target"
+     }
+    ]
+   },
+   {
+    "eventid": 176,
+    "name": "cs_game_disconnected",
+    "keys": []
+   },
+   {
+    "eventid": 177,
+    "name": "cs_win_panel_round",
+    "keys": [
+     {
+      "type": 6,
+      "name": "show_timer_defend"
+     },
+     {
+      "type": 6,
+      "name": "show_timer_attack"
+     },
+     {
+      "type": 4,
+      "name": "timer_time"
+     },
+     {
+      "type": 5,
+      "name": "final_event"
+     },
+     {
+      "type": 1,
+      "name": "funfact_token"
+     },
+     {
+      "type": 4,
+      "name": "funfact_player"
+     },
+     {
+      "type": 3,
+      "name": "funfact_data1"
+     },
+     {
+      "type": 3,
+      "name": "funfact_data2"
+     },
+     {
+      "type": 3,
+      "name": "funfact_data3"
+     }
+    ]
+   },
+   {
+    "eventid": 178,
+    "name": "cs_win_panel_match",
+    "keys": []
+   },
+   {
+    "eventid": 179,
+    "name": "cs_match_end_restart",
+    "keys": []
+   },
+   {
+    "eventid": 180,
+    "name": "cs_pre_restart",
+    "keys": []
+   },
+   {
+    "eventid": 181,
+    "name": "show_freezepanel",
+    "keys": [
+     {
+      "type": 4,
+      "name": "victim"
+     },
+     {
+      "type": 4,
+      "name": "killer"
+     },
+     {
+      "type": 4,
+      "name": "hits_taken"
+     },
+     {
+      "type": 4,
+      "name": "damage_taken"
+     },
+     {
+      "type": 4,
+      "name": "hits_given"
+     },
+     {
+      "type": 4,
+      "name": "damage_given"
+     }
+    ]
+   },
+   {
+    "eventid": 182,
+    "name": "hide_freezepanel",
+    "keys": []
+   },
+   {
+    "eventid": 183,
+    "name": "freezecam_started",
+    "keys": []
+   },
+   {
+    "eventid": 184,
+    "name": "player_avenged_teammate",
+    "keys": [
+     {
+      "type": 4,
+      "name": "avenger_id"
+     },
+     {
+      "type": 4,
+      "name": "avenged_player_id"
+     }
+    ]
+   },
+   {
+    "eventid": 185,
+    "name": "achievement_earned_local",
+    "keys": [
+     {
+      "type": 4,
+      "name": "achievement"
+     },
+     {
+      "type": 4,
+      "name": "splitscreenplayer"
+     }
+    ]
+   },
+   {
+    "eventid": 186,
+    "name": "item_found",
+    "keys": [
+     {
+      "type": 5,
+      "name": "player"
+     },
+     {
+      "type": 5,
+      "name": "quality"
+     },
+     {
+      "type": 5,
+      "name": "method"
+     },
+     {
+      "type": 3,
+      "name": "itemdef"
+     },
+     {
+      "type": 3,
+      "name": "itemid"
+     }
+    ]
+   },
+   {
+    "eventid": 187,
+    "name": "repost_xbox_achievements",
+    "keys": [
+     {
+      "type": 4,
+      "name": "splitscreenplayer"
+     }
+    ]
+   },
+   {
+    "eventid": 188,
+    "name": "match_end_conditions",
+    "keys": [
+     {
+      "type": 3,
+      "name": "frags"
+     },
+     {
+      "type": 3,
+      "name": "max_rounds"
+     },
+     {
+      "type": 3,
+      "name": "win_rounds"
+     },
+     {
+      "type": 3,
+      "name": "time"
+     }
+    ]
+   },
+   {
+    "eventid": 189,
+    "name": "round_mvp",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "reason"
+     }
+    ]
+   },
+   {
+    "eventid": 190,
+    "name": "client_disconnect",
+    "keys": []
+   },
+   {
+    "eventid": 191,
+    "name": "gg_player_levelup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "weaponrank"
+     },
+     {
+      "type": 1,
+      "name": "weaponname"
+     }
+    ]
+   },
+   {
+    "eventid": 192,
+    "name": "ggtr_player_levelup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "weaponrank"
+     },
+     {
+      "type": 1,
+      "name": "weaponname"
+     }
+    ]
+   },
+   {
+    "eventid": 193,
+    "name": "ggprogressive_player_levelup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "weaponrank"
+     },
+     {
+      "type": 1,
+      "name": "weaponname"
+     }
+    ]
+   },
+   {
+    "eventid": 194,
+    "name": "gg_killed_enemy",
+    "keys": [
+     {
+      "type": 4,
+      "name": "victimid"
+     },
+     {
+      "type": 4,
+      "name": "attackerid"
+     },
+     {
+      "type": 4,
+      "name": "dominated"
+     },
+     {
+      "type": 4,
+      "name": "revenge"
+     },
+     {
+      "type": 6,
+      "name": "bonus"
+     }
+    ]
+   },
+   {
+    "eventid": 195,
+    "name": "gg_final_weapon_achieved",
+    "keys": [
+     {
+      "type": 4,
+      "name": "playerid"
+     }
+    ]
+   },
+   {
+    "eventid": 196,
+    "name": "gg_bonus_grenade_achieved",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 197,
+    "name": "switch_team",
+    "keys": [
+     {
+      "type": 4,
+      "name": "numPlayers"
+     },
+     {
+      "type": 4,
+      "name": "numSpectators"
+     },
+     {
+      "type": 4,
+      "name": "avg_rank"
+     },
+     {
+      "type": 4,
+      "name": "numTSlotsFree"
+     },
+     {
+      "type": 4,
+      "name": "numCTSlotsFree"
+     }
+    ]
+   },
+   {
+    "eventid": 198,
+    "name": "gg_leader",
+    "keys": [
+     {
+      "type": 4,
+      "name": "playerid"
+     }
+    ]
+   },
+   {
+    "eventid": 199,
+    "name": "gg_player_impending_upgrade",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 200,
+    "name": "write_profile_data",
+    "keys": []
+   },
+   {
+    "eventid": 201,
+    "name": "trial_time_expired",
+    "keys": [
+     {
+      "type": 4,
+      "name": "slot"
+     }
+    ]
+   },
+   {
+    "eventid": 202,
+    "name": "update_matchmaking_stats",
+    "keys": []
+   },
+   {
+    "eventid": 203,
+    "name": "player_reset_vote",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 6,
+      "name": "vote"
+     }
+    ]
+   },
+   {
+    "eventid": 204,
+    "name": "enable_restart_voting",
+    "keys": [
+     {
+      "type": 6,
+      "name": "enable"
+     }
+    ]
+   },
+   {
+    "eventid": 205,
+    "name": "sfuievent",
+    "keys": [
+     {
+      "type": 1,
+      "name": "action"
+     },
+     {
+      "type": 1,
+      "name": "data"
+     },
+     {
+      "type": 5,
+      "name": "slot"
+     }
+    ]
+   },
+   {
+    "eventid": 206,
+    "name": "start_vote",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "type"
+     },
+     {
+      "type": 4,
+      "name": "vote_parameter"
+     }
+    ]
+   },
+   {
+    "eventid": 207,
+    "name": "player_given_c4",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 208,
+    "name": "gg_reset_round_start_sounds",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 209,
+    "name": "tr_player_flashbanged",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 210,
+    "name": "tr_mark_complete",
+    "keys": [
+     {
+      "type": 4,
+      "name": "complete"
+     }
+    ]
+   },
+   {
+    "eventid": 211,
+    "name": "tr_mark_best_time",
+    "keys": [
+     {
+      "type": 3,
+      "name": "time"
+     }
+    ]
+   },
+   {
+    "eventid": 212,
+    "name": "tr_exit_hint_trigger",
+    "keys": []
+   },
+   {
+    "eventid": 213,
+    "name": "bot_takeover",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 4,
+      "name": "botid"
+     },
+     {
+      "type": 4,
+      "name": "index"
+     }
+    ]
+   },
+   {
+    "eventid": 214,
+    "name": "tr_show_finish_msgbox",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 215,
+    "name": "tr_show_exit_msgbox",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     }
+    ]
+   },
+   {
+    "eventid": 216,
+    "name": "reset_player_controls",
+    "keys": []
+   },
+   {
+    "eventid": 217,
+    "name": "jointeam_failed",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "reason"
+     }
+    ]
+   },
+   {
+    "eventid": 218,
+    "name": "teamchange_pending",
+    "keys": [
+     {
+      "type": 4,
+      "name": "userid"
+     },
+     {
+      "type": 5,
+      "name": "toteam"
+     }
+    ]
+   },
+   {
+    "eventid": 219,
+    "name": "material_default_complete",
+    "keys": []
+   },
+   {
+    "eventid": 220,
+    "name": "cs_prev_next_spectator",
+    "keys": [
+     {
+      "type": 6,
+      "name": "next"
+     }
+    ]
+   },
+   {
+    "eventid": 222,
+    "name": "nextlevel_changed",
+    "keys": [
+     {
+      "type": 1,
+      "name": "nextlevel"
+     }
+    ]
+   },
+   {
+    "eventid": 223,
+    "name": "seasoncoin_levelup",
+    "keys": [
+     {
+      "type": 4,
+      "name": "player"
+     },
+     {
+      "type": 4,
+      "name": "category"
+     },
+     {
+      "type": 4,
+      "name": "rank"
+     }
+    ]
+   },
+   {
+    "eventid": 224,
+    "name": "tournament_reward",
+    "keys": [
+     {
+      "type": 3,
+      "name": "defindex"
+     },
+     {
+      "type": 3,
+      "name": "totalrewards"
+     },
+     {
+      "type": 3,
+      "name": "accountid"
+     }
+    ]
+   },
+   {
+    "eventid": 225,
+    "name": "hltv_status",
+    "keys": [
+     {
+      "type": 3,
+      "name": "clients"
+     },
+     {
+      "type": 3,
+      "name": "slots"
+     },
+     {
+      "type": 4,
+      "name": "proxies"
+     },
+     {
+      "type": 1,
+      "name": "master"
+     },
+     {
+      "type": 3,
+      "name": "externaltotal"
+     },
+     {
+      "type": 3,
+      "name": "externallinked"
+     }
+    ]
+   },
+   {
+    "eventid": 226,
+    "name": "hltv_cameraman",
+    "keys": [
+     {
+      "type": 4,
+      "name": "index"
+     }
+    ]
+   },
+   {
+    "eventid": 227,
+    "name": "hltv_rank_camera",
+    "keys": [
+     {
+      "type": 5,
+      "name": "index"
+     },
+     {
+      "type": 2,
+      "name": "rank"
+     },
+     {
+      "type": 4,
+      "name": "target"
+     }
+    ]
+   },
+   {
+    "eventid": 228,
+    "name": "hltv_rank_entity",
+    "keys": [
+     {
+      "type": 4,
+      "name": "index"
+     },
+     {
+      "type": 2,
+      "name": "rank"
+     },
+     {
+      "type": 4,
+      "name": "target"
+     }
+    ]
+   },
+   {
+    "eventid": 229,
+    "name": "hltv_fixed",
+    "keys": [
+     {
+      "type": 3,
+      "name": "posx"
+     },
+     {
+      "type": 3,
+      "name": "posy"
+     },
+     {
+      "type": 3,
+      "name": "posz"
+     },
+     {
+      "type": 4,
+      "name": "theta"
+     },
+     {
+      "type": 4,
+      "name": "phi"
+     },
+     {
+      "type": 4,
+      "name": "offset"
+     },
+     {
+      "type": 2,
+      "name": "fov"
+     },
+     {
+      "type": 4,
+      "name": "target"
+     }
+    ]
+   },
+   {
+    "eventid": 230,
+    "name": "hltv_chase",
+    "keys": [
+     {
+      "type": 4,
+      "name": "target1"
+     },
+     {
+      "type": 4,
+      "name": "target2"
+     },
+     {
+      "type": 4,
+      "name": "distance"
+     },
+     {
+      "type": 4,
+      "name": "theta"
+     },
+     {
+      "type": 4,
+      "name": "phi"
+     },
+     {
+      "type": 5,
+      "name": "inertia"
+     },
+     {
+      "type": 5,
+      "name": "ineye"
+     }
+    ]
+   },
+   {
+    "eventid": 231,
+    "name": "hltv_message",
+    "keys": [
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 232,
+    "name": "hltv_title",
+    "keys": [
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   },
+   {
+    "eventid": 233,
+    "name": "hltv_chat",
+    "keys": [
+     {
+      "type": 1,
+      "name": "text"
+     }
+    ]
+   }
+  ]
+ },
+ "messageName": "CSVCMsg_GameEventList"
+}

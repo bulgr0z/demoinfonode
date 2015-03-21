@@ -1,0 +1,2267 @@
+{ demoType: 'HL2DEMO',
+  demoProtocol: 4,
+  netProtocol: 13451,
+  hostName: 'Valve CS:GO EU North Server (srcds106.184.21)',
+  clientName: 'GOTV Demo',
+  mapName: 'de_mirage',
+  gameDir: 'csgo',
+  time: 1513.0625,
+  ticks: 96836,
+  frames: 24202,
+  signOn: 398460 }
+
+
+EVENT { player_connect: 
+   [ { name: 'GreκeΝ<3',
+       index: 1,
+       userid: 5,
+       networkid: 'STEAM_1:0:78096185',
+       address: '' },
+     { name: 'Eagleborg<3',
+       index: 2,
+       userid: 6,
+       networkid: 'STEAM_1:1:29274543',
+       address: '' },
+     { name: 's.mowgli',
+       index: 3,
+       userid: 7,
+       networkid: 'STEAM_1:0:15100321',
+       address: '' },
+     { name: 'Coach Criisp༼ つ ◕_◕ ༽つ',
+       index: 4,
+       userid: 8,
+       networkid: 'STEAM_1:0:31465755',
+       address: '' },
+     { name: 'Xar [fr]',
+       index: 5,
+       userid: 9,
+       networkid: 'STEAM_1:0:32623268',
+       address: '' },
+     { name: 'Van`ka^^',
+       index: 6,
+       userid: 10,
+       networkid: 'STEAM_1:1:32766687',
+       address: '' },
+     { name: 'Le LollyBolly',
+       index: 7,
+       userid: 11,
+       networkid: 'STEAM_1:1:98181399',
+       address: '' },
+     { name: 'fr . bulgroz',
+       index: 8,
+       userid: 12,
+       networkid: 'STEAM_1:0:1040666',
+       address: '' },
+     { name: '.ns [bkmn prod.]',
+       index: 9,
+       userid: 13,
+       networkid: 'STEAM_1:0:35401802',
+       address: '' },
+     { name: 'CombyWomby',
+       index: 10,
+       userid: 14,
+       networkid: 'STEAM_1:1:51494024',
+       address: '' } ] }
+
+
+EVENT { player_connect: 
+   [ { name: 'Yanni',
+       index: 11,
+       userid: 15,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Ulysses',
+       index: 12,
+       userid: 16,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Opie',
+       index: 13,
+       userid: 17,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Eugene',
+       index: 14,
+       userid: 18,
+       networkid: 'BOT',
+       address: '' } ] }
+
+
+EVENT { player_connect: 
+   [ { name: 'Oliver',
+       index: 15,
+       userid: 19,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Ferris',
+       index: 16,
+       userid: 20,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Ulric',
+       index: 17,
+       userid: 21,
+       networkid: 'BOT',
+       address: '' },
+     { name: 'Frank',
+       index: 18,
+       userid: 22,
+       networkid: 'BOT',
+       address: '' } ] }
+
+
+EVENT { player_connect: 
+   [ { name: 'Ernie',
+       index: 19,
+       userid: 23,
+       networkid: 'BOT',
+       address: '' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 16,
+       reason: 'Kicked by Console',
+       name: 'Ulysses',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 19,
+       reason: 'Kicked by Console',
+       name: 'Oliver',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 15,
+       reason: 'Kicked by Console',
+       name: 'Yanni',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 17,
+       reason: 'Kicked by Console',
+       name: 'Opie',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 18,
+       reason: 'Kicked by Console',
+       name: 'Eugene',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 21,
+       reason: 'Kicked by Console',
+       name: 'Ulric',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 22,
+       attacker: 23,
+       assister: 0,
+       weapon: 'sg556',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584359',
+       weapon_originalowner_xuid: '0',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 7,
+       assister: 0,
+       weapon: 'usp_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584381',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 20,
+       reason: 'Kicked by Console',
+       name: 'Ferris',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 14,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 22,
+       reason: 'Kicked by Console',
+       name: 'Frank',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_disconnect: 
+   [ { userid: 23,
+       reason: 'Kicked by Console',
+       name: 'Ernie',
+       networkid: 'BOT' } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 7,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 6,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '623757795',
+       weapon_fauxitemid: '18446744069428477961',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '21528417',
+       weapon_fauxitemid: '18446744069426970684',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 7,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 9,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '21528417',
+       weapon_fauxitemid: '18446744069426970684',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 14,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 14,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 14,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 8,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'usp_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584381',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 13,
+       assister: 0,
+       weapon: 'usp_silencer_off',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584381',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 13,
+       weapon: 'hkp2000',
+       weapon_itemid: '773656767',
+       weapon_fauxitemid: '18446744069436735520',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'glock',
+       weapon_itemid: '500925947',
+       weapon_fauxitemid: '18446744069433786372',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 10,
+       assister: 0,
+       weapon: 'hkp2000',
+       weapon_itemid: '773656767',
+       weapon_fauxitemid: '18446744069436735520',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 10,
+       assister: 12,
+       weapon: 'hkp2000',
+       weapon_itemid: '773656767',
+       weapon_fauxitemid: '18446744069436735520',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 11,
+       assister: 5,
+       weapon: 'glock',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584324',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 9,
+       assister: 0,
+       weapon: 'hegrenade',
+       weapon_itemid: '',
+       weapon_fauxitemid: '',
+       weapon_originalowner_xuid: '',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 10,
+       assister: 12,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'famas',
+       weapon_itemid: '796769058',
+       weapon_fauxitemid: '18446744069426249738',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 0,
+       weapon: 'famas',
+       weapon_itemid: '796769058',
+       weapon_fauxitemid: '18446744069426249738',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 0,
+       weapon: 'famas',
+       weapon_itemid: '796769058',
+       weapon_fauxitemid: '18446744069426249738',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 6,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '683694165',
+       weapon_fauxitemid: '18446744069417467911',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 7,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 13,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'cz75a',
+       weapon_itemid: '759957189',
+       weapon_fauxitemid: '18446744069437521983',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 10,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 10,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 11,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 10,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 9,
+       assister: 10,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 8,
+       assister: 5,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 8,
+       assister: 14,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 8,
+       assister: 0,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 12,
+       assister: 9,
+       weapon: 'hegrenade',
+       weapon_itemid: '',
+       weapon_fauxitemid: '',
+       weapon_originalowner_xuid: '',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 8,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 12,
+       assister: 9,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'ssg08',
+       weapon_itemid: '775268788',
+       weapon_fauxitemid: '18446744069418516520',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '13343820',
+       weapon_fauxitemid: '18446744069417926665',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 5,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '723402220',
+       weapon_fauxitemid: '18446744069434245127',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 11,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '623757795',
+       weapon_fauxitemid: '18446744069428477961',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 13,
+       assister: 0,
+       weapon: 'usp_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584381',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 13,
+       assister: 9,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 6,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 8,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 14,
+       assister: 6,
+       weapon: 'p90',
+       weapon_itemid: '460119392',
+       weapon_fauxitemid: '18446744069430575123',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 8,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584329',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 10,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '623757795',
+       weapon_fauxitemid: '18446744069428477961',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 10,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '623757795',
+       weapon_fauxitemid: '18446744069428477961',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 11,
+       assister: 5,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 11,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 14,
+       assister: 11,
+       weapon: 'ssg08',
+       weapon_itemid: '775268788',
+       weapon_fauxitemid: '18446744069418516520',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 13,
+       assister: 10,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 10,
+       assister: 0,
+       weapon: 'aug',
+       weapon_itemid: '645034148',
+       weapon_fauxitemid: '18446744069417598984',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 10,
+       assister: 0,
+       weapon: 'aug',
+       weapon_itemid: '645034148',
+       weapon_fauxitemid: '18446744069417598984',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 11,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'ssg08',
+       weapon_itemid: '775268788',
+       weapon_fauxitemid: '18446744069418516520',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 10,
+       assister: 0,
+       weapon: 'aug',
+       weapon_itemid: '645034148',
+       weapon_fauxitemid: '18446744069417598984',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 14,
+       assister: 8,
+       weapon: 'p90',
+       weapon_itemid: '460119392',
+       weapon_fauxitemid: '18446744069430575123',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 6,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 9,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '13343820',
+       weapon_fauxitemid: '18446744069417926665',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 10,
+       assister: 12,
+       weapon: 'aug',
+       weapon_itemid: '645034148',
+       weapon_fauxitemid: '18446744069417598984',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 14,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '460119392',
+       weapon_fauxitemid: '18446744069430575123',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 6,
+       assister: 14,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 6,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 6,
+       assister: 14,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 6,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '785449869',
+       weapon_fauxitemid: '18446744069422710803',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 10,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 10,
+       assister: 12,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 14,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '460119392',
+       weapon_fauxitemid: '18446744069430575123',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 5,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '605989606',
+       weapon_fauxitemid: '18446744069419630652',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 7,
+       attacker: 8,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 14,
+       assister: 0,
+       weapon: 'p90',
+       weapon_itemid: '460119392',
+       weapon_fauxitemid: '18446744069430575123',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 8,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 10,
+       attacker: 5,
+       assister: 0,
+       weapon: 'awp',
+       weapon_itemid: '13343820',
+       weapon_fauxitemid: '18446744069417926665',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 12,
+       assister: 10,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 14,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ump45',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584344',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 12,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 13,
+       assister: 0,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 9,
+       assister: 0,
+       weapon: 'glock',
+       weapon_itemid: '19506828',
+       weapon_fauxitemid: '18446744069417730052',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 10,
+       assister: 13,
+       weapon: 'p250',
+       weapon_itemid: '792669476',
+       weapon_fauxitemid: '18446744069421072420',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 9,
+       assister: 0,
+       weapon: 'usp_silencer',
+       weapon_itemid: '514046282',
+       weapon_fauxitemid: '18446744069433589821',
+       weapon_originalowner_xuid: '76561198063253777',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'hegrenade',
+       weapon_itemid: '',
+       weapon_fauxitemid: '',
+       weapon_originalowner_xuid: '',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 6,
+       assister: 0,
+       weapon: 'usp_silencer_off',
+       weapon_itemid: '546978674',
+       weapon_fauxitemid: '18446744069433589821',
+       weapon_originalowner_xuid: '76561198018814815',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 13,
+       assister: 9,
+       weapon: 'hkp2000',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584352',
+       weapon_originalowner_xuid: '76561198116458098',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '12651535',
+       weapon_fauxitemid: '18446744069417467911',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 12,
+       attacker: 8,
+       assister: 0,
+       weapon: 'fiveseven',
+       weapon_itemid: '728372554',
+       weapon_fauxitemid: '18446744069419696131',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 9,
+       assister: 12,
+       weapon: 'ak47',
+       weapon_itemid: '12651535',
+       weapon_fauxitemid: '18446744069417467911',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 7,
+       assister: 10,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 7,
+       assister: 13,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 9,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '12651535',
+       weapon_fauxitemid: '18446744069417467911',
+       weapon_originalowner_xuid: '76561198025512264',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 12,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '796763964',
+       weapon_fauxitemid: '18446744069434376199',
+       weapon_originalowner_xuid: '76561197962347060',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 13,
+       attacker: 8,
+       assister: 0,
+       weapon: 'mp7',
+       weapon_itemid: '786232512',
+       weapon_fauxitemid: '18446744069437784097',
+       weapon_originalowner_xuid: '76561198023197238',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 10,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '789829022',
+       weapon_fauxitemid: '18446744069419302919',
+       weapon_originalowner_xuid: '76561198025799103',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 7,
+       assister: 9,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 8,
+       attacker: 13,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 5,
+       attacker: 7,
+       assister: 0,
+       weapon: 'bizon',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584346',
+       weapon_originalowner_xuid: '76561197990466370',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 9,
+       attacker: 11,
+       assister: 6,
+       weapon: 'm4a1_silencer',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584380',
+       weapon_originalowner_xuid: '76561198156628527',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 6,
+       attacker: 13,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: false,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 11,
+       attacker: 13,
+       assister: 10,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
+
+
+EVENT { player_death: 
+   [ { userid: 14,
+       attacker: 13,
+       assister: 0,
+       weapon: 'ak47',
+       weapon_itemid: '0',
+       weapon_fauxitemid: '18446744069414584327',
+       weapon_originalowner_xuid: '76561198031069332',
+       headshot: true,
+       dominated: 0,
+       revenge: 0,
+       penetrated: 0 } ] }
