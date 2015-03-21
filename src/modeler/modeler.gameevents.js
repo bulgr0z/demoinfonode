@@ -26,12 +26,15 @@ GameEvents.prototype.decodeEvents = function(packet) {
 
   var decoded = {};
   var hasGameEvent = false;
+  var meta = packet.metadata;
 
   packet.messages.forEach(function(msg) {
 
     if (msg.messageName === 'CSVCMsg_GameEvent') {
 
+      decoded['tick'] = meta.tick;
       var message = msg.message;
+
       if (this.eventsById[message.eventid]) {
         var eventType = this.eventsById[message.eventid].name;
 
@@ -43,12 +46,8 @@ GameEvents.prototype.decodeEvents = function(packet) {
         decoded[eventType].push(gameevent);
         hasGameEvent = true;
       }
-      // msg.message.eventid
-      // this.handleGameEvent(msg.message, )
-      // console.log(JSON.stringify(msg, null, 1))
-      // HANDLE GAME EVENT
     }
-    
+
     if (msg.messageName === 'CSVCMsg_GameEventList') {
 
       msg.message.descriptors.forEach(function(descriptor) {

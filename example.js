@@ -5,7 +5,7 @@ var Fs = require('fs')
 
 // player_connect_full
 // player_team
-var eventsToDecode = ['player_death', 'player_connect', 'player_disconnect']
+var eventsToDecode = ['player_death', 'player_connect', 'player_info']
 // var eventsToDecode = ['player_death', 'player_team', 'player_connect_full']
 
 var entrystream = Fs.createReadStream('/Volumes/MecanicalHD/Dropbox/dev/csgo/demo/match730_003035043074272133283_0536844275_184.dem');
