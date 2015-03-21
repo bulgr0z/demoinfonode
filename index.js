@@ -1,5 +1,5 @@
 var PacketParser = require('./src/parser/packetparser.js')
-  , PacketDecoder = require('./src/decoder/decoder.js');
+  , PacketDecoder = require('./src/decoder/decoder.js')
   , GameEvents = require('./src/modeler/modeler.gameevents.js');
 
 module.exports = {
