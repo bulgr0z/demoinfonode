@@ -11,6 +11,9 @@ var Util = require('util')
 var PacketParser = function(options) {
 	Stream.Transform.call(this, {objectMode: true});
 
+	var test = [];
+
+
 	// 1 or more buffer slices
 	this.slices = [];
 	// current packet header
